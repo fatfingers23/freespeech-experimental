@@ -1,4 +1,5 @@
-.tile {
+.tile, .navigation {
+    all: unset;
     user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
@@ -20,11 +21,15 @@
     transition-duration: .1s;
 }
 
-.tile:active {
+.tile:active, .navigation:active {
     transform:scale(.9);
 }
 
-.tile img {
+.tile img, .navigation img {
     padding-left:50%;
     transform: translate(-25px,0);
+}
+
+.navigation {
+    border-top-left-radius:25px;
 }

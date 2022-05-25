@@ -2,3 +2,30 @@
     display: flex;
     flex-wrap: wrap;
 }
+
+.breadcrumb {
+    color: white;
+    min-width: 50%;
+    max-width: 70%;
+    margin-left: 50%;
+    transform: translate(-50%);
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    font-size: large;
+}
+
+.breadcrumb button {
+    background-color: #339af0;
+    border: 0px;
+    border-radius: 5px;
+}
+
+.breadcrumb button:disabled {
+    filter: opacity(.5);
+    background-color: #343a40;
+}
+
+.rotate {
+    transform: rotate(180deg);
+}

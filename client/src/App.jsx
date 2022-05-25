@@ -7,8 +7,8 @@ function App() {
   const [tileData, setTileData] = createSignal([]);
 
   onMount(async () => {
-    // Fetches data from a dummy api server
-    const res = await fetch(`https://jsonplaceholder.typicode.com/photos?_limit=20`);
+    // Fetches the public default English template
+    const res = await fetch(`http://127.0.0.1:5000/public/english`);
     setTileData(await res.json());
   });
 

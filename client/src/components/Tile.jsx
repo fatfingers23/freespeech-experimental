@@ -7,11 +7,18 @@ import styles from '../styles/Tile.module.css';
 */
 
 function Tile(props) {
+
+    // Handle click event.
+    function handleInteraction() {
+        if(props.navigation)
+            props.callback(props.navigation);
+    }
+    
     return (
-        <div class={styles.tile}>
+        <button onclick={handleInteraction} class={props.navigation ? styles.navigation : styles.tile}>
             <img width="50px" src={props.image} alt="" />
             <p>{props.text}</p>
-        </div>
+        </button>
     );
 }
 

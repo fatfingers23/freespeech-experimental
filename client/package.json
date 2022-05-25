@@ -1,5 +1,6 @@
 {
   "name": "vite-template-solid",
+  "proxy":"http://localhost:5000",
   "version": "0.0.0",
   "description": "",
   "scripts": {

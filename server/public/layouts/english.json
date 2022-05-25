@@ -1,5 +1,5 @@
 {
-  "home": [
+  "Home": [
     {
       "text": "I",
       "image": "https://d18vdu4p71yql0.cloudfront.net/libraries/arasaac/I.png.varianted-skin.png"
@@ -122,7 +122,8 @@
     },
     {
       "text": "People",
-      "image": "https://d18vdu4p71yql0.cloudfront.net/libraries/arasaac/group%20of%20people.png.varianted-skin.png"
+      "image": "https://d18vdu4p71yql0.cloudfront.net/libraries/arasaac/group%20of%20people.png.varianted-skin.png",
+      "navigation": "People"
     },
     {
       "text": "help",
@@ -237,12 +238,186 @@
       "image": "https://d18vdu4p71yql0.cloudfront.net/libraries/arasaac/special%20activities%20senior%20technician_2.png"
     },
     {
-      "text": "Next Page",
+      "text": "Page 2",
       "image": "",
-      "navigation": "anotha"
+      "navigation": "next_page"
     }
   ],
-  "anotha":[
+  "People":[
+    {
+        "text": "I",
+        "image": "https://d18vdu4p71yql0.cloudfront.net/libraries/arasaac/I.png.varianted-skin.png"
+      },
+      {
+        "text": "is",
+        "image": "https://d18vdu4p71yql0.cloudfront.net/libraries/arasaac/equal%20sign.png"
+      },
+      {
+        "text": "can",
+        "image": "https://d18vdu4p71yql0.cloudfront.net/libraries/arasaac/can_4.png"
+      },
+      {
+        "text": "do",
+        "image": "https://d18vdu4p71yql0.cloudfront.net/libraries/arasaac/make%20-%20do%20-%20write.png.varianted-skin.png"
+      },
+      {
+        "text": "have",
+        "image": "https://d18vdu4p71yql0.cloudfront.net/libraries/arasaac/to%20have_4.png.varianted-skin.png"
+      },
+      {
+        "text": "what",
+        "image": "https://d18vdu4p71yql0.cloudfront.net/libraries/arasaac/What%20are%20yopu%20looking%20at.png"
+      },
+      {
+        "text": "where",
+        "image": "https://d18vdu4p71yql0.cloudfront.net/libraries/arasaac/where%20do%20you%20live.png"
+      },
+      {
+        "text": "who",
+        "image": "https://d18vdu4p71yql0.cloudfront.net/libraries/arasaac/who.png"
+      },
+      {
+        "text": "not",
+        "image": "https://d18vdu4p71yql0.cloudfront.net/libraries/arasaac/former.png"
+      },
+      {
+        "text": "more",
+        "image": "https://d18vdu4p71yql0.cloudfront.net/libraries/arasaac/more_1.png"
+      },
+      {
+        "text": "you",
+        "image": "https://d18vdu4p71yql0.cloudfront.net/libraries/arasaac/you.png.varianted-skin.png"
+      },
+      {
+        "text": "this",
+        "image": "https://d18vdu4p71yql0.cloudfront.net/libraries/arasaac/this.png"
+      },
+      {
+        "text": "want",
+        "image": "https://d18vdu4p71yql0.cloudfront.net/libraries/arasaac/to%20want.png.varianted-skin.png"
+      },
+      {
+        "text": "like",
+        "image": "https://d18vdu4p71yql0.cloudfront.net/libraries/arasaac/I%20am%20fine.png"
+      },
+      {
+        "text": "mom",
+        "image": ""
+      },
+      {
+        "text": "to",
+        "image": ""
+      },
+      {
+        "text": "dad",
+        "image": ""
+      },
+      {
+        "text": "from",
+        "image": ""
+      },
+      {
+        "text": "good",
+        "image": ""
+      },
+      {
+        "text": "all done",
+        "image": ""
+      },
+      {
+        "text": "it",
+        "image": ""
+      },
+      {
+        "text": "that",
+        "image": ""
+      },
+      {
+        "text": "brother",
+        "image": ""
+      },
+      {
+        "text": "sister",
+        "image": ""
+      },
+      {
+        "text": "grandmother",
+        "image": ""
+      },
+      {
+        "text": "for",
+        "image": ""
+      },
+      {
+        "text": "grandfather",
+        "image": ""
+      },
+      {
+        "text": "friend",
+        "image": ""
+      },
+      {
+        "text": "bad",
+        "image": ""
+      },
+      {
+        "text": "he",
+        "image": ""
+      },
+      {
+        "text": "she",
+        "image": ""
+      },
+      {
+        "text": "teacher",
+        "image": ""
+      },
+      {
+        "text": "aide",
+        "image": ""
+      },
+      {
+        "text": "doctor",
+        "image": ""
+      },
+      {
+        "text": "nurse",
+        "image": ""
+      },
+      {
+        "text": "therapist",
+        "image": ""
+      },
+      {
+        "text": "Family",
+        "image": ""
+      },
+      {
+        "text": "Friends",
+        "image": ""
+      },
+      {
+        "text": "Teachers",
+        "image": ""
+      },
+      {
+        "text": "Contacts",
+        "image": ""
+      },
+      {
+        "text": "Pronouns",
+        "image": ""
+      },
+      {
+        "text": "and",
+        "image": ""
+      },
+      {
+        "text": "Page 2",
+        "image": ""
+      }
+  ],
+  "next_page":[
       {
         "text": "Next Page",
         "image": ""
@@ -250,7 +425,7 @@
       {
         "text": "home",
         "image": "",
-        "navigation": "home"
+        "navigation": "Home"
       }
   ]
 }
