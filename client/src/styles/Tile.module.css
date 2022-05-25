@@ -1,0 +1,30 @@
+.tile {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    background-color: #343a40;
+    color:white;
+    padding:10px;
+    margin:10px;
+    border-radius:5px;
+    font-size: 18px;
+    width: fit-content;
+    flex: 1 1 100px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    box-shadow: -2px -1px 8px rgba(0, 0, 0, 0.1)  ; 
+    -webkit-box-shadow: -2px -1px 8px rgba(0, 0, 0, 0.1)  ; 
+    -moz-box-shadow: -2px -1px 8px rgba(0, 0, 0, 0.1)  ; 
+    transition-duration: .1s;
+}
+
+.tile:active {
+    transform:scale(.9);
+}
+
+.tile img {
+    padding-left:50%;
+    transform: translate(-25px,0);
+}
