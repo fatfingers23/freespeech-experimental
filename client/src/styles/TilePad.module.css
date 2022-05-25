@@ -19,11 +19,16 @@
     background-color: #339af0;
     border: 0px;
     border-radius: 5px;
+    transition-duration: .1s;
 }
 
 .breadcrumb button:disabled {
     filter: opacity(.5);
     background-color: #343a40;
+}
+
+.breadcrumb button:active {
+    transform: scale(.75);
 }
 
 .rotate {
