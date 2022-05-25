@@ -10,8 +10,11 @@ function Tile(props) {
 
     // Handle click event.
     function handleInteraction() {
-        if(props.navigation)
+        if(props.navigation) {
             props.callback(props.navigation);
+        } else {
+            window.speechSynthesis.speak(new SpeechSynthesisUtterance(props.text));
+        }
     }
     
     return (

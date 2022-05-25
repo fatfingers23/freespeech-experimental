@@ -1,10 +1,18 @@
 import { createSignal, onMount } from "solid-js";
 
-import TilePad from './components/TilePad';
 import styles from './styles/App.module.css';
+
+import TilePad from './components/TilePad';
+import MenuBar from './components/MenuBar';
+import Settings from './components/Settings';
 
 function App() {
   const [tileData, setTileData] = createSignal([]);
+  const [navigation, setNavigation] = createSignal('tiles');
+
+  function navigate(nav) {
+    setNavigation(nav);
+  }
 
   onMount(async () => {
     // Fetches the public default English template
@@ -14,7 +22,17 @@ function App() {
 
   return (
     <div class={styles.app}>
-      <TilePad tileData={tileData} />
+      <MenuBar callback={navigate} />
+
+      {/* Tiles page */}
+      <Show when={navigation() == 'tiles'}>
+        <TilePad tileData={tileData} />
+      </Show>
+
+      {/* Settings page */}
+      <Show when={navigation() == 'settings'}>
+        <Settings />
+      </Show>
     </div>
   );
 }

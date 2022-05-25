@@ -1,0 +1,48 @@
+.MenuBar {
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.BrandingText {
+    font-weight: 300;
+    margin:0px;
+    color: white;
+    font-size: 15px;
+    margin-top: 5px;
+}
+
+.BrandingText a {
+    all:unset;
+    font-weight: 100;
+    font-size: smaller;
+    transition-duration: .3s;
+}
+
+.BrandingText a:hover {
+    color: #a5d8ff;
+    cursor: pointer;
+}
+
+.navIcons {
+    display: flex;
+    gap: 10px;
+    font-size: 13px;
+    color: white;
+    user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
+.navIcons span {
+    transition-duration: .3s;
+}
+
+.navIcons button {
+    all: unset;
+}
+
+.navIcons span:hover {
+    cursor: pointer;
+    color: #a5d8ff;
+}

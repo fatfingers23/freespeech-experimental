@@ -3,7 +3,7 @@
     flex-wrap: wrap;
 }
 
-.breadcrumb {
+.navigation_bar {
     color: white;
     min-width: 50%;
     max-width: 70%;
@@ -15,20 +15,25 @@
     font-size: large;
 }
 
-.breadcrumb button {
-    background-color: #339af0;
+.navigation_bar button {
+    background-color: #228be6;
     border: 0px;
     border-radius: 5px;
     transition-duration: .1s;
 }
 
-.breadcrumb button:disabled {
+.navigation_bar button:disabled {
     filter: opacity(.5);
     background-color: #343a40;
 }
 
-.breadcrumb button:active {
+.navigation_bar button:active {
     transform: scale(.75);
+}
+
+.app_header {
+    background-color: #343a40;
+    padding-bottom: 5px;
 }
 
 .rotate {
