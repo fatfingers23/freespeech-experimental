@@ -1,0 +1,59 @@
+.settingsCategories {
+    display: flex;
+    justify-content: space-between;
+    width: 40%;
+    margin-left: 50%;
+    transform: translate(-50%);
+}
+
+.settingsCategories a {
+    text-decoration: none;
+    color: #a5d8ff;
+    font-size: medium;
+    padding: 1rem;
+    border-radius: 5px;
+    transition-duration: .2s;
+}
+
+.settingsCategories a:hover {
+    color:white;
+    cursor: pointer;
+}
+
+.settingsMain {
+    width: 70%;
+    margin-left: 50%;
+    transform: translate(-50%);
+    color: white;
+}
+
+.settingsMain h1 {
+    color: #a5d8ff;
+}
+
+.settingsMain p {
+    font-weight: 300;
+    margin-bottom:4px;
+    margin-top:4px;
+}
+
+.settingsSplit {
+    display: flex;
+    justify-content: space-between;
+}
+
+.settingsSplit p {
+    width: 70%;
+}
+
+.settingsSplit select {
+    width: 30%;
+    text-align: center;
+    font-size: medium;
+    background-color: #a5d8ff;
+    border: none;
+    border-radius: 5px;
+    color: white;
+
+}
+

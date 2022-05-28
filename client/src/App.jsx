@@ -1,4 +1,5 @@
-import { createSignal, onMount } from "solid-js";
+import { createSignal, onMount, Show } from "solid-js";
+import { styled } from "solid-styled-components";
 
 import styles from './styles/App.module.css';
 
@@ -7,8 +8,34 @@ import MenuBar from './components/MenuBar';
 import Settings from './components/Settings';
 
 function App() {
-  const [tileData, setTileData] = createSignal([]);
   const [navigation, setNavigation] = createSignal('tiles');
+
+  // Tile data
+  const [tileData, setTileData] = createSignal([]);
+  
+  // Theme
+  const themeLight = {
+    name: 'Light',
+    tileColor: '#f8f9fa',
+    backgroundColor: '#e9ecef',
+    textColor: 'black',
+    navigationColor: '#228be6'
+  };
+
+  const themeDark = {
+    name: 'Dark',
+    tileColor: '#343a40',
+    backgroundColor: '#212529',
+    textColor: 'white',
+    navigationColor: '#228be6'
+  };
+
+  const [theme, setTheme] = createSignal(themeDark);
+
+  // Changes the background color of the app to match the theme.
+  const AppWrapper = styled("div")`
+    background-color: ${theme().backgroundColor};
+  `;
 
   function navigate(nav) {
     setNavigation(nav);
@@ -20,20 +47,32 @@ function App() {
     setTileData(await res.json());
   });
 
+  function themeChange(elem) {
+    const userSelection = elem.target.value;
+    
+    if(userSelection == 'Dark')
+      setTheme(themeDark);
+
+    if(userSelection == 'Light')
+      setTheme(themeLight);
+  }
+
   return (
-    <div class={styles.app}>
-      <MenuBar callback={navigate} />
+    <>
+    <AppWrapper class={styles.app}>
+      {/* {<MenuBar theme={theme()} callback={navigate} />} */}
 
       {/* Tiles page */}
       <Show when={navigation() == 'tiles'}>
-        <TilePad tileData={tileData} />
+        <TilePad theme={theme()} tileData={tileData} />
       </Show>
 
       {/* Settings page */}
       <Show when={navigation() == 'settings'}>
-        <Settings />
+        <Settings themeCallback={themeChange} />
       </Show>
-    </div>
+    </AppWrapper>
+    </>
   );
 }
 

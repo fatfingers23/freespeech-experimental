@@ -1,4 +1,5 @@
 import styles from '../styles/Tile.module.css';
+import { styled } from "solid-styled-components";
 
 /* Tile Component 
    - This renders a tile.
@@ -7,6 +8,13 @@ import styles from '../styles/Tile.module.css';
 */
 
 function Tile(props) {
+
+    const TileBtn = styled("button")`
+        --tile-color: ${props.theme.tileColor};
+        --text-color: ${props.theme.textColor};
+        --navigation-color: ${props.theme.navigationColor};
+        --border-color: ${props.borderColor ? props.borderColor : 'transparent'};
+    `;
 
     // Handle click event.
     function handleInteraction() {
@@ -18,10 +26,13 @@ function Tile(props) {
     }
     
     return (
-        <button onclick={handleInteraction} class={props.navigation ? styles.navigation : styles.tile}>
+        <TileBtn onclick={handleInteraction} class={props.navigation ? styles.navigation : styles.tile}>
+            <Show when={props.navigation}>
+                <div class={styles.navFolder}></div>
+            </Show>
             <img width="50px" src={props.image} alt="" />
             <p>{props.text}</p>
-        </button>
+        </TileBtn>
     );
 }
 

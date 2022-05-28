@@ -2,7 +2,8 @@
   "Home": [
     {
       "text": "I",
-      "image": "https://d18vdu4p71yql0.cloudfront.net/libraries/arasaac/I.png.varianted-skin.png"
+      "image": "https://d18vdu4p71yql0.cloudfront.net/libraries/arasaac/I.png.varianted-skin.png",
+      "borderColor":"#7950f2"
     },
     {
       "text": "is",

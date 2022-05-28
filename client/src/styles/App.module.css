@@ -1,5 +1,6 @@
 .app {
-    background-color:#212529;
+    background-color: var(--background-color);
     font-family: sans-serif;
     transition-duration: .1s;
+    height: 100vh;
 }
