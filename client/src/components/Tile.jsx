@@ -21,7 +21,8 @@ function Tile(props) {
         if(props.navigation) {
             props.callback(props.navigation);
         } else {
-            window.speechSynthesis.speak(new SpeechSynthesisUtterance(props.text));
+            if (!props.muted)
+                window.speechSynthesis.speak(new SpeechSynthesisUtterance(props.text));
         }
     }
     

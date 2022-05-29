@@ -4,6 +4,19 @@
     font-size: var(--font-size) !important;
 }
 
+.loader {
+    position: absolute;
+    top: 50%;
+    text-align: center;
+    display:block;
+    width: 100vh;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: larger;
+    font-weight:100;
+  }
+
 .navigation_bar {
     color: var(--text-color);
     min-width: 50%;
@@ -41,7 +54,7 @@
     transform: rotate(180deg);
 }
 
-.edit_button {
+.edit_button, .volume_button {
     position: absolute;
     top: 50%;
     transform:translate(50px, -50%);
@@ -58,6 +71,22 @@
 }
 
 .edit_active {
+    border: white solid 2px;
+    padding: 13px;
+}
+
+.volume_button {
+    right:0;
+    transform:translate(-50px, -50%);
+    background-color: #37b24d;
+}
+
+.volume_button:active {
+    background-color: #2f9e44
+}
+
+.volume_active {
+    background-color: #f03e3e;
     border: white solid 2px;
     padding: 13px;
 }

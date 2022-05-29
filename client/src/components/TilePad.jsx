@@ -17,7 +17,8 @@ function TilePad(props) {
 	const [page, setPage] = createSignal("Home");
 	const [sessionHistory, setSessionHistory] = createSignal(["Home"]);
 	const [futureHistory, setFutureHistory] = createSignal([]);
-	const [editMode, setEditMode] = createSignal(true);
+	const [editMode, setEditMode] = createSignal(false);
+	const [muted, setMuted] = createSignal(false);
 	const [tilePadSettings, setTilePadSettings] = createSignal({
 		fontSize: "18",
 		iconSize: "50"
@@ -40,7 +41,7 @@ function TilePad(props) {
 	function navigateBack() {
 		let currentPage = sessionHistory().pop(); // Remove the current page from the history
 		setFutureHistory([...futureHistory(), currentPage]); // Add the current page to the future history
-		setPage(sessionHistory().at(-1)); // Set the page to the previous page
+		setPage(sessionHistory()[sessionHistory().length-1]); // Set the page to the previous page
 	}
 
 	function navigateForwards() {
@@ -58,6 +59,13 @@ function TilePad(props) {
 			setEditMode(false);
 		else
 			setEditMode(true);
+	}
+
+	function toggleMute() {
+		if(muted())
+			setMuted(false);
+		else
+			setMuted(true);
 	}
 
 	/*
@@ -92,6 +100,10 @@ function TilePad(props) {
 				
 				<button onclick={toggleEditMode} class={`${styles.edit_button} ${editMode() ? styles.edit_active : ''}`}>
 					<span class="material-symbols-outlined">edit</span>
+				</button>
+
+				<button onclick={toggleMute} class={`${styles.volume_button} ${muted() ? styles.volume_active : ''}`}>
+					<span class="material-symbols-outlined">{muted() ? 'volume_off' : 'volume_up'}</span>
 				</button>
 				
 				<div class={styles.navigation_bar}>
@@ -148,11 +160,12 @@ function TilePad(props) {
 			<div style={{'--font-size':`${tilePadSettings().fontSize}px`}} class={styles.tilepad}>
 				<For
 					each={props.tileData()[page()]}
-					fallback={<div>Loading...</div>}
+					fallback={<div class={styles.loader}><p>We're getting things ready for you!</p></div>}
 				>
 					{(item) => (
 						<Tile
 							{...item}
+							muted={muted()}
 							iconSize={tilePadSettings().iconSize}
 							theme={props.theme}
 							callback={updatePage}
