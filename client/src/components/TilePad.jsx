@@ -1,4 +1,4 @@
-import { createSignal } from "solid-js";
+import { createSignal, Show } from "solid-js";
 import { styled } from "solid-styled-components";
 
 import styles from "../styles/TilePad.module.css";
@@ -17,6 +17,11 @@ function TilePad(props) {
 	const [page, setPage] = createSignal("Home");
 	const [sessionHistory, setSessionHistory] = createSignal(["Home"]);
 	const [futureHistory, setFutureHistory] = createSignal([]);
+	const [editMode, setEditMode] = createSignal(true);
+	const [tilePadSettings, setTilePadSettings] = createSignal({
+		fontSize: "18",
+		iconSize: "50"
+	});
 
 	// Callback function for the <Tile> component. Updates the pages when user clicks a folder.
 	function updatePage(page) {
@@ -27,6 +32,10 @@ function TilePad(props) {
 		setPage(page); // Update the page state.
 		setSessionHistory([...sessionHistory(), page]); // Update the session history.
 	}
+
+	/*
+		Navigation Functions
+	*/
 
 	function navigateBack() {
 		let currentPage = sessionHistory().pop(); // Remove the current page from the history
@@ -40,14 +49,51 @@ function TilePad(props) {
 		setPage(nextPage); // Set the page to the next page
 	}
 
+	/*
+		Action Button Functions
+	*/
+
+	function toggleEditMode() {
+		if(editMode())
+			setEditMode(false);
+		else
+			setEditMode(true);
+	}
+
+	/*
+		Tile Pad Settings Functions
+	*/
+
+	function updateFontSize(e) {
+		setTilePadSettings({...tilePadSettings(), fontSize: e.target.value});
+	}
+
+	function updateIconSize(e) {
+		setTilePadSettings({...tilePadSettings(), iconSize: e.target.value});
+	}
+
 	const NavigationWrapper = styled("div")`
 		--navigation-ribbon-color: ${props.theme.tileColor};
 		--text-color: ${props.theme.textColor};
+		margin-bottom: 5px;
+		position: relative;
+	`;
+
+	const EditModeWrapper = styled("div")`
+		--navigation-ribbon-color: ${props.theme.tileColor};
+		--text-color: ${props.theme.textColor};
+		margin-bottom: 5px;
+		position: relative;
 	`;
 
 	return (
 		<>
 			<NavigationWrapper class={styles.app_header}>
+				
+				<button onclick={toggleEditMode} class={`${styles.edit_button} ${editMode() ? styles.edit_active : ''}`}>
+					<span class="material-symbols-outlined">edit</span>
+				</button>
+				
 				<div class={styles.navigation_bar}>
 					<button
 						disabled={sessionHistory().length < 2}
@@ -86,7 +132,20 @@ function TilePad(props) {
 				</div>
 			</NavigationWrapper>
 
-			<div class={styles.tilepad}>
+			<Show when={editMode()}>
+				<EditModeWrapper class={styles.edit_mode_ribbon}>
+					<div>
+						<p>Text size:</p>
+						<input onchange={updateFontSize} type="number" value="18" />
+					</div>
+					<div>
+						<p>Icon size:</p>
+						<input onchange={updateIconSize} type="number" value="50" />
+					</div>
+				</EditModeWrapper>
+			</Show>
+
+			<div style={{'--font-size':`${tilePadSettings().fontSize}px`}} class={styles.tilepad}>
 				<For
 					each={props.tileData()[page()]}
 					fallback={<div>Loading...</div>}
@@ -94,6 +153,7 @@ function TilePad(props) {
 					{(item) => (
 						<Tile
 							{...item}
+							iconSize={tilePadSettings().iconSize}
 							theme={props.theme}
 							callback={updatePage}
 						/>

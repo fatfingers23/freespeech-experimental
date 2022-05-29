@@ -26,11 +26,11 @@ function Tile(props) {
     }
     
     return (
-        <TileBtn onclick={handleInteraction} class={props.navigation ? styles.navigation : styles.tile}>
+        <TileBtn style={{'--icon-offset':`${(props.iconSize*-1)/2}px`}} onclick={handleInteraction} class={props.navigation ? styles.navigation : styles.tile}>
             <Show when={props.navigation}>
                 <div class={styles.navFolder}></div>
             </Show>
-            <img width="50px" src={props.image} alt="" />
+            <img width={`${props.iconSize}px`} src={props.image} alt="" />
             <p>{props.text}</p>
         </TileBtn>
     );
