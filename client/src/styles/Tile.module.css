@@ -9,7 +9,7 @@
     margin:5px;
     border-radius:5px;
     width: fit-content;
-    flex: 1 1 100px;
+    flex: 1 1 var(--wrap-width);
     display: flex;
     flex-direction: column;
     text-align: center;

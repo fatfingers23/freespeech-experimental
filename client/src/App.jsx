@@ -1,5 +1,4 @@
 import { createSignal, onMount, Show } from "solid-js";
-import { styled } from "solid-styled-components";
 
 import styles from './styles/App.module.css';
 
@@ -32,11 +31,6 @@ function App() {
 
   const [theme, setTheme] = createSignal(themeDark);
 
-  // Changes the background color of the app to match the theme.
-  const AppWrapper = styled("div")`
-    background-color: ${theme().backgroundColor};
-  `;
-
   function navigate(nav) {
     setNavigation(nav);
   }
@@ -59,8 +53,8 @@ function App() {
 
   return (
     <>
-    <AppWrapper class={styles.app}>
-      {/* {<MenuBar theme={theme()} callback={navigate} />} */}
+    <div style={{'--background-color':theme().backgroundColor}} class={styles.app}>
+      <MenuBar theme={theme()} callback={navigate} />
 
       {/* Tiles page */}
       <Show when={navigation() == 'tiles'}>
@@ -71,7 +65,7 @@ function App() {
       <Show when={navigation() == 'settings'}>
         <Settings themeCallback={themeChange} />
       </Show>
-    </AppWrapper>
+    </div>
     </>
   );
 }

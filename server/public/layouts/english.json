@@ -3,23 +3,27 @@
     {
       "text": "I",
       "image": "https://d18vdu4p71yql0.cloudfront.net/libraries/arasaac/I.png.varianted-skin.png",
-      "borderColor":"#7950f2"
+      "borderColor":"#f59f00"
     },
     {
       "text": "is",
-      "image": "https://d18vdu4p71yql0.cloudfront.net/libraries/arasaac/equal%20sign.png"
+      "image": "https://d18vdu4p71yql0.cloudfront.net/libraries/arasaac/equal%20sign.png",
+      "borderColor":"#f03e3e"
     },
     {
       "text": "can",
-      "image": "https://d18vdu4p71yql0.cloudfront.net/libraries/arasaac/can_4.png"
+      "image": "https://d18vdu4p71yql0.cloudfront.net/libraries/arasaac/can_4.png",
+      "borderColor":"#ae3ec9"
     },
     {
       "text": "do",
-      "image": "https://d18vdu4p71yql0.cloudfront.net/libraries/arasaac/make%20-%20do%20-%20write.png.varianted-skin.png"
+      "image": "https://d18vdu4p71yql0.cloudfront.net/libraries/arasaac/make%20-%20do%20-%20write.png.varianted-skin.png",
+      "borderColor":"#7048e8"
     },
     {
       "text": "have",
-      "image": "https://d18vdu4p71yql0.cloudfront.net/libraries/arasaac/to%20have_4.png.varianted-skin.png"
+      "image": "https://d18vdu4p71yql0.cloudfront.net/libraries/arasaac/to%20have_4.png.varianted-skin.png",
+      "borderColor":"#4263eb"
     },
     {
       "text": "what",

@@ -1,5 +1,4 @@
 import styles from "../styles/MenuBar.module.css";
-import { styled } from "solid-styled-components";
 
 function MenuBar(props) {
 	function navigateTiles() {
@@ -8,14 +7,15 @@ function MenuBar(props) {
 	function navigateSettings() {
 		props.callback("settings");
 	}
-    
-	const MenuBarWrapper = styled("div")`
-		--icon-color: ${props.theme.textColor};
-		--text-color: ${props.theme.textColor};
-	`;
 
 	return (
-		<MenuBarWrapper class={styles.MenuBar}>
+		<div
+			style={{
+				"--icon-color": props.theme.textColor,
+				"--text-color": props.theme.textColor,
+			}}
+			class={styles.MenuBar}
+		>
 			<p class={styles.BrandingText}>
 				Free Speech AAC{" "}
 				<a
@@ -33,7 +33,7 @@ function MenuBar(props) {
 					<span class="material-symbols-outlined">settings</span>
 				</button>
 			</div>
-		</MenuBarWrapper>
+		</div>
 	);
 }
 

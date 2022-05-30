@@ -21,7 +21,8 @@ function TilePad(props) {
 	const [muted, setMuted] = createSignal(false);
 	const [tilePadSettings, setTilePadSettings] = createSignal({
 		fontSize: "18",
-		iconSize: "50"
+		iconSize: "50",
+		tileWidth: "100",
 	});
 
 	// Callback function for the <Tile> component. Updates the pages when user clicks a folder.
@@ -41,7 +42,7 @@ function TilePad(props) {
 	function navigateBack() {
 		let currentPage = sessionHistory().pop(); // Remove the current page from the history
 		setFutureHistory([...futureHistory(), currentPage]); // Add the current page to the future history
-		setPage(sessionHistory()[sessionHistory().length-1]); // Set the page to the previous page
+		setPage(sessionHistory()[sessionHistory().length - 1]); // Set the page to the previous page
 	}
 
 	function navigateForwards() {
@@ -55,17 +56,13 @@ function TilePad(props) {
 	*/
 
 	function toggleEditMode() {
-		if(editMode())
-			setEditMode(false);
-		else
-			setEditMode(true);
+		if (editMode()) setEditMode(false);
+		else setEditMode(true);
 	}
 
 	function toggleMute() {
-		if(muted())
-			setMuted(false);
-		else
-			setMuted(true);
+		if (muted()) setMuted(false);
+		else setMuted(true);
 	}
 
 	/*
@@ -73,11 +70,15 @@ function TilePad(props) {
 	*/
 
 	function updateFontSize(e) {
-		setTilePadSettings({...tilePadSettings(), fontSize: e.target.value});
+		setTilePadSettings({ ...tilePadSettings(), fontSize: e.target.value });
 	}
 
 	function updateIconSize(e) {
-		setTilePadSettings({...tilePadSettings(), iconSize: e.target.value});
+		setTilePadSettings({ ...tilePadSettings(), iconSize: e.target.value });
+	}
+
+	function updateTileWidth(e) {
+		setTilePadSettings({ ...tilePadSettings(), tileWidth: e.target.value });
 	}
 
 	const NavigationWrapper = styled("div")`
@@ -87,25 +88,29 @@ function TilePad(props) {
 		position: relative;
 	`;
 
-	const EditModeWrapper = styled("div")`
-		--navigation-ribbon-color: ${props.theme.tileColor};
-		--text-color: ${props.theme.textColor};
-		margin-bottom: 5px;
-		position: relative;
-	`;
-
 	return (
 		<>
 			<NavigationWrapper class={styles.app_header}>
-				
-				<button onclick={toggleEditMode} class={`${styles.edit_button} ${editMode() ? styles.edit_active : ''}`}>
+				<button
+					onclick={toggleEditMode}
+					class={`${styles.edit_button} ${
+						editMode() ? styles.edit_active : ""
+					}`}
+				>
 					<span class="material-symbols-outlined">edit</span>
 				</button>
 
-				<button onclick={toggleMute} class={`${styles.volume_button} ${muted() ? styles.volume_active : ''}`}>
-					<span class="material-symbols-outlined">{muted() ? 'volume_off' : 'volume_up'}</span>
+				<button
+					onclick={toggleMute}
+					class={`${styles.volume_button} ${
+						muted() ? styles.volume_active : ""
+					}`}
+				>
+					<span class="material-symbols-outlined">
+						{muted() ? "volume_off" : "volume_up"}
+					</span>
 				</button>
-				
+
 				<div class={styles.navigation_bar}>
 					<button
 						disabled={sessionHistory().length < 2}
@@ -145,28 +150,57 @@ function TilePad(props) {
 			</NavigationWrapper>
 
 			<Show when={editMode()}>
-				<EditModeWrapper class={styles.edit_mode_ribbon}>
+				<div
+					style={{
+						"--text-color": props.theme.textColor,
+					}}
+					class={styles.edit_mode_ribbon}
+				>
 					<div>
 						<p>Text size:</p>
-						<input onchange={updateFontSize} type="number" value="18" />
+						<input
+							onchange={updateFontSize}
+							type="number"
+							value={tilePadSettings().fontSize}
+						/>
 					</div>
 					<div>
 						<p>Icon size:</p>
-						<input onchange={updateIconSize} type="number" value="50" />
+						<input
+							onchange={updateIconSize}
+							type="number"
+							value={tilePadSettings().iconSize}
+						/>
 					</div>
-				</EditModeWrapper>
+					<div>
+						<p>Tile width:</p>
+						<input
+							onchange={updateTileWidth}
+							type="number"
+							value={tilePadSettings().tileWidth}
+						/>
+					</div>
+				</div>
 			</Show>
 
-			<div style={{'--font-size':`${tilePadSettings().fontSize}px`}} class={styles.tilepad}>
+			<div
+				style={{ "--font-size": `${tilePadSettings().fontSize}px` }}
+				class={styles.tilepad}
+			>
 				<For
 					each={props.tileData()[page()]}
-					fallback={<div class={styles.loader}><p>We're getting things ready for you!</p></div>}
+					fallback={
+						<div class={styles.loader}>
+							<p>We're getting things ready for you!</p>
+						</div>
+					}
 				>
 					{(item) => (
 						<Tile
 							{...item}
 							muted={muted()}
 							iconSize={tilePadSettings().iconSize}
+							tileWidth={tilePadSettings().tileWidth}
 							theme={props.theme}
 							callback={updatePage}
 						/>
