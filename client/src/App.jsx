@@ -1,4 +1,5 @@
 import { createSignal, onMount, Show } from "solid-js";
+import { Routes, Route } from "solid-app-router"
 
 import styles from './styles/App.module.css';
 
@@ -9,8 +10,6 @@ import Settings from './components/Settings';
 import { Color } from './assets/open-color';
 
 function App() {
-  const [navigation, setNavigation] = createSignal('tiles');
-
   // Tile data
   const [tileData, setTileData] = createSignal([]);
   
@@ -41,10 +40,6 @@ function App() {
 
   const [theme, setTheme] = createSignal(themeDark);
 
-  function navigate(nav) {
-    setNavigation(nav);
-  }
-
   onMount(async () => {
     // Fetches the public default English template
     const res = await fetch(`http://127.0.0.1:5000/public/english`);
@@ -65,17 +60,12 @@ function App() {
   return (
     <>
     <div style={{'--background-color':theme().backgroundColor}} class={styles.app}>
-      <MenuBar theme={theme()} callback={navigate} />
+      <MenuBar theme={theme()} />
 
-      {/* Tiles page */}
-      <Show when={navigation() == 'tiles'}>
-        <TilePad theme={theme()} tileData={tileData} />
-      </Show>
-
-      {/* Settings page */}
-      <Show when={navigation() == 'settings'}>
-        <Settings theme={theme()} themeCallback={themeChange} />
-      </Show>
+      <Routes>
+        <Route path="/" element={ <TilePad theme={theme()} tileData={tileData} />} />
+        <Route path="/settings" element={<Settings theme={theme()} themeCallback={themeChange} />} />
+      </Routes>
     </div>
     </>
   );

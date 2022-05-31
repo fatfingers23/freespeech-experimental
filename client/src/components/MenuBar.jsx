@@ -1,13 +1,8 @@
 import styles from "../styles/MenuBar.module.css";
+import { Link } from "solid-app-router";
+
 
 function MenuBar(props) {
-	function navigateTiles() {
-		props.callback("tiles");
-	}
-	function navigateSettings() {
-		props.callback("settings");
-	}
-
 	return (
 		<div
 			style={{
@@ -27,12 +22,12 @@ function MenuBar(props) {
 				</a>
 			</p>
 			<div class={styles.navIcons}>
-				<button onClick={navigateTiles}>
+				<Link href="/">
 					<span class="material-symbols-outlined">grid_view</span>
-				</button>
-				<button onClick={navigateSettings}>
+				</Link>
+				<Link href="/settings">
 					<span class="material-symbols-outlined">settings</span>
-				</button>
+				</Link>
 			</div>
 		</div>
 	);

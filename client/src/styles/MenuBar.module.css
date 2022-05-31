@@ -37,6 +37,7 @@
 }
 
 .navIcons span {
+    color: var(--text-color);
     transition-duration: .3s;
 }
 
