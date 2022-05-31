@@ -89,7 +89,17 @@ function TilePad(props) {
 	`;
 
 	return (
-		<>
+		<div style={{
+			"--text-color": props.theme.textColor,
+			"--background-color": props.theme.backgroundColor,
+			"--font-size": `${tilePadSettings().fontSize}px`,
+			"--navigation-color": props.theme.navigationColor,
+			"--navigation-color-disable": props.theme.tileColor,
+			"--edit-button-color": props.theme.editButtonColor,
+			"--volume-button-color": props.theme.volumeButtonColor,
+			"--volume-muted-button-color": props.theme.volumeMutedButtonColor
+			
+		}}>
 			<NavigationWrapper class={styles.app_header}>
 				<button
 					onclick={toggleEditMode}
@@ -134,9 +144,7 @@ function TilePad(props) {
 
 			<Show when={editMode()}>
 				<div
-					style={{
-						"--text-color": props.theme.textColor,
-					}}
+					
 					class={styles.edit_mode_ribbon}
 				>
 					<div>
@@ -167,7 +175,6 @@ function TilePad(props) {
 			</Show>
 
 			<div
-				style={{ "--font-size": `${tilePadSettings().fontSize}px` }}
 				class={styles.tilepad}
 			>
 				<For
@@ -190,7 +197,7 @@ function TilePad(props) {
 					)}
 				</For>
 			</div>
-		</>
+		</div>
 	);
 }
 

@@ -2,7 +2,12 @@ import styles from "../styles/Settings.module.css";
 
 function Settings(props) {
 	return (
-		<>
+		<div
+			style={{
+				"--text-color": props.theme.textColor,
+				"--highlight-color": props.theme.highlightColor,
+			}}
+		>
 			<div class={styles.settingsCategories}>
 				<a>Appearance</a>
 				<a>Archive</a>
@@ -27,7 +32,7 @@ function Settings(props) {
 					</select>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 }
 

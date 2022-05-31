@@ -8,7 +8,7 @@
 
 .settingsCategories a {
     text-decoration: none;
-    color: #a5d8ff;
+    color: var(--highlight-color);
     font-size: medium;
     padding: 1rem;
     border-radius: 5px;
@@ -16,7 +16,7 @@
 }
 
 .settingsCategories a:hover {
-    color:white;
+    color: var(--text-color);
     cursor: pointer;
 }
 
@@ -24,11 +24,11 @@
     width: 70%;
     margin-left: 50%;
     transform: translate(-50%);
-    color: white;
+    color: var(--text-color);
 }
 
 .settingsMain h1 {
-    color: #a5d8ff;
+    color: var(--highlight-color);
 }
 
 .settingsMain p {
@@ -50,10 +50,10 @@
     width: 30%;
     text-align: center;
     font-size: medium;
-    background-color: #a5d8ff;
+    background-color: var(--highlight-color);
     border: none;
     border-radius: 5px;
-    color: white;
+    color: var(--text-color);
 
 }
 

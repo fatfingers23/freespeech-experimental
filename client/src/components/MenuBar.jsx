@@ -13,6 +13,7 @@ function MenuBar(props) {
 			style={{
 				"--icon-color": props.theme.textColor,
 				"--text-color": props.theme.textColor,
+				"--highlight-color": props.theme.highlightColor
 			}}
 			class={styles.MenuBar}
 		>

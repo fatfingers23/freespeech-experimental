@@ -22,7 +22,7 @@
 }
 
 .BrandingText a:hover {
-    color: #a5d8ff;
+    color: var(--highlight-color);
     cursor: pointer;
 }
 
@@ -46,5 +46,5 @@
 
 .navIcons span:hover {
     cursor: pointer;
-    color: #a5d8ff;
+    color: var(--highlight-color);
 }
