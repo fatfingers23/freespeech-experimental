@@ -53,6 +53,8 @@
 .app_header {
     background-color: var(--navigation-ribbon-color);
     padding-bottom: 5px;
+    margin-bottom: 5px;
+	position: relative;
 }
 
 .edit_button, .volume_button {
