@@ -15,8 +15,15 @@ import TilePadNavigation from './TilePadNavigation';
 
 function TilePad(props) {
 	const [page, setPage] = createSignal("Home");
-	const [sessionHistory, setSessionHistory] = createSignal(["Home"]);
-	const [futureHistory, setFutureHistory] = createSignal([]);
+	const [muted, setMuted] = createSignal(false);
+	const [history, setHistory] = createSignal(
+		{
+			sessionHistory: ["Home"],
+			futureHistory: []
+		}
+	);
+	// const [sessionHistory, setSessionHistory] = createSignal(["Home"]);
+	// const [futureHistory, setFutureHistory] = createSignal([]);
 	
 	const [tilePadSettings, setTilePadSettings] = createSignal({
 		fontSize: "18",
@@ -25,12 +32,12 @@ function TilePad(props) {
 	});
 
 	function updatePage(_page) {
-		if (futureHistory().length > 0)
+		if (history().futureHistory.length > 0)
 			// Clear the future history if there is any.
-			setFutureHistory([]);
+			setHistory({...history(), futureHistory: []});
 
 		setPage(_page); // Update the page state.
-		setSessionHistory([...sessionHistory(), page()]); // Update the session history.
+		setHistory({...history(), sessionHistory: [...history().sessionHistory, page()]}); // Update the session history.
 	}
 
 	return (
@@ -53,10 +60,10 @@ function TilePad(props) {
 				setPage={setPage}
 				tilePadSettings={tilePadSettings}
 				setTilePadSettings={setTilePadSettings}
-				futureHistory={futureHistory}
-				setFutureHistory={setFutureHistory}
-				sessionHistory={sessionHistory}
-				setSessionHistory={setSessionHistory}
+				history={history}
+				setHistory={setHistory}
+				muted={muted}
+				setMuted={setMuted}
 			/>
 
 			<div class={styles.tilepad}>

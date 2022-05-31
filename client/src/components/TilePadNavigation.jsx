@@ -6,7 +6,6 @@ import styles from "../styles/TilePad.module.css";
 
 function TilePadNavigation(props) {
     const [editMode, setEditMode] = createSignal(false);
-	const [muted, setMuted] = createSignal(false);
     
     function toggleEditMode() {
         if (editMode()) setEditMode(false);
@@ -14,9 +13,9 @@ function TilePadNavigation(props) {
     }
     
     function toggleMute() {
-        if (muted()) setMuted(false);
+        if (props.muted()) props.setMuted(false);
         else {
-            setMuted(true);
+            props.setMuted(true);
             window.speechSynthesis.cancel();
         }
     }
@@ -26,14 +25,14 @@ function TilePadNavigation(props) {
 	*/
 
 	function navigateBack() {
-		let currentPage = props.sessionHistory().pop(); // Remove the current page from the history
-		props.setFutureHistory([...props.futureHistory(), currentPage]); // Add the current page to the future history
-		props.setPage(props.sessionHistory()[props.sessionHistory().length - 1]); // Set the page to the previous page
+		let currentPage = props.history().sessionHistory.pop(); // Remove the current page from the history
+		props.setHistory({...props.history(), futureHistory:[...props.history().futureHistory, currentPage]}); // Add the current page to the future history
+		props.setPage(props.history().sessionHistory[props.history().sessionHistory.length - 1]); // Set the page to the previous page
 	}
 
 	function navigateForwards() {
-		let nextPage = props.futureHistory().pop(); // Remove the next page from the future history
-		props.setSessionHistory([...props.sessionHistory(), nextPage]); // Add the next page to the session history
+		let nextPage = props.history().futureHistory.pop(); // Remove the next page from the future history
+		props.setHistory({...props.history(), sessionHistory: [...props.history().sessionHistory, nextPage]}); // Add the next page to the session history
 		props.setPage(nextPage); // Set the page to the next page
 	}
 
@@ -53,8 +52,6 @@ function TilePadNavigation(props) {
 		props.setTilePadSettings({ ...props.tilePadSettings(), tileWidth: e.target.value });
 	}
 
-    console.log(props.sessionHistory())
-
 	return (
 		<div>
 			<div class={styles.app_header}>
@@ -70,17 +67,17 @@ function TilePadNavigation(props) {
 				<button
 					onclick={toggleMute}
 					class={`${styles.volume_button} ${
-						muted() ? styles.volume_active : ""
+						props.muted() ? styles.volume_active : ""
 					}`}
 				>
 					<span class="material-symbols-outlined">
-						{muted() ? "volume_off" : "volume_up"}
+						{props.muted() ? "volume_off" : "volume_up"}
 					</span>
 				</button>
 
 				<div class={styles.navigation_bar}>
 					<button
-						disabled={props.sessionHistory().length < 2}
+						disabled={props.history().sessionHistory.length < 2}
 						onClick={navigateBack}
 					>
 						<span class="material-symbols-outlined">
@@ -89,7 +86,7 @@ function TilePadNavigation(props) {
 					</button>
 					<p>{props.page()}</p>
 					<button
-						disabled={props.futureHistory().length < 1}
+						disabled={props.history().futureHistory.length < 1}
 						onClick={navigateForwards}
 					>
 						<span class="material-symbols-outlined">
