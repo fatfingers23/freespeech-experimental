@@ -5,11 +5,10 @@ import styles from "../styles/TilePad.module.css";
 
 
 function TilePadNavigation(props) {
-    const [editMode, setEditMode] = createSignal(false);
     
     function toggleEditMode() {
-        if (editMode()) setEditMode(false);
-        else setEditMode(true);
+        if (props.editMode()) props.setEditMode(false);
+        else props.setEditMode(true);
     }
     
     function toggleMute() {
@@ -58,7 +57,7 @@ function TilePadNavigation(props) {
 				<button
 					onclick={toggleEditMode}
 					class={`${styles.edit_button} ${
-						editMode() ? styles.edit_active : ""
+						props.editMode() ? styles.edit_active : ""
 					}`}
 				>
 					<span class="material-symbols-outlined">edit</span>
@@ -96,7 +95,7 @@ function TilePadNavigation(props) {
 				</div>
 			</div>
 
-			<Show when={editMode()}>
+			<Show when={props.editMode()}>
 				<div class={styles.edit_mode_ribbon}>
 					<div>
 						<p>Text size:</p>

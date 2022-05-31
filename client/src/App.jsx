@@ -33,7 +33,7 @@ function App() {
     backgroundColor: Color['gray-9'],
     textColor: Color['gray-0'],
     navigationColor: Color['blue-6'],
-    highlightColor: Color['blue-2'],
+    highlightColor: Color['blue-4'],
     editButtonColor: Color['yellow-7'],
     volumeButtonColor: Color['green-7'],
     volumeMutedButtonColor: Color['red-7']

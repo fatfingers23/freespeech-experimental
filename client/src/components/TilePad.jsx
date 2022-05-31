@@ -4,6 +4,7 @@ import styles from "../styles/TilePad.module.css";
 
 import Tile from "./Tile";
 import TilePadNavigation from './TilePadNavigation';
+import EditModal from './EditModal';
 
 /* TilePad Component 
    - This renders a grid of tiles based on an array of tiles
@@ -16,6 +17,8 @@ import TilePadNavigation from './TilePadNavigation';
 function TilePad(props) {
 	const [page, setPage] = createSignal("Home");
 	const [muted, setMuted] = createSignal(false);
+	const [editMode, setEditMode] = createSignal(false);
+	const [editModalOpen, setEditModalOpen] = createSignal(false);
 	const [history, setHistory] = createSignal(
 		{
 			sessionHistory: ["Home"],
@@ -40,6 +43,16 @@ function TilePad(props) {
 		setHistory({...history(), sessionHistory: [...history().sessionHistory, page()]}); // Update the session history.
 	}
 
+	function handleEdit() {
+		if(!editModalOpen()) {
+			setEditModalOpen(true);
+		}
+	}
+
+	function closeEditModal() {
+		setEditModalOpen(false);
+	}
+
 	return (
 		<div
 			style={{
@@ -54,7 +67,10 @@ function TilePad(props) {
 					props.theme.volumeMutedButtonColor,
 				"--navigation-ribbon-color": props.theme.tileColor
 			}}
-		>
+		>	
+			<Show when={editModalOpen()}>
+				<EditModal closeModal={closeEditModal} theme={props.theme} />
+			</Show>
 			<TilePadNavigation 
 				page={page}
 				setPage={setPage}
@@ -64,6 +80,8 @@ function TilePad(props) {
 				setHistory={setHistory}
 				muted={muted}
 				setMuted={setMuted}
+				editMode={editMode}
+				setEditMode={setEditMode}
 			/>
 
 			<div class={styles.tilepad}>
@@ -82,7 +100,9 @@ function TilePad(props) {
 							iconSize={tilePadSettings().iconSize}
 							tileWidth={tilePadSettings().tileWidth}
 							theme={props.theme}
+							editMode={editMode}
 							callback={updatePage}
+							handleEdit={handleEdit}
 						/>
 					)}
 				</For>

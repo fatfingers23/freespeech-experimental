@@ -9,13 +9,17 @@ import styles from "../styles/Tile.module.css";
 function Tile(props) {
 	// Handle click event.
 	function handleInteraction() {
-		if (props.navigation) {
-			props.callback(props.navigation);
+		if (!props.editMode()) {
+			if (props.navigation) {
+				props.callback(props.navigation);
+			} else {
+				if (!props.muted)
+					window.speechSynthesis.speak(
+						new SpeechSynthesisUtterance(props.text)
+					);
+			}
 		} else {
-			if (!props.muted)
-				window.speechSynthesis.speak(
-					new SpeechSynthesisUtterance(props.text)
-				);
+			props.handleEdit();
 		}
 	}
 

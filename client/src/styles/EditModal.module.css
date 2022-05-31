@@ -1,0 +1,55 @@
+.editModal {
+	background-color: var(--tile-color);
+    color: var(--text-color);
+    font-size: large;
+    border: solid var(--background-color) 10px;
+    border-radius: 5px;
+	width: 85%;
+	max-width: 500px;
+	height: fit-content;
+	z-index: 10;
+	position: absolute;
+	top: 20%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	box-shadow: -2px -1px 8px rgba(0, 0, 0, 0.3);
+	-webkit-box-shadow: -2px -1px 8px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow: -2px -1px 8px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+}
+
+.overlay {
+    position: absolute;
+    z-index: 9;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.editModalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.editIcon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.editModalHeader button {
+    background-color: var(--close-btn-color);
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    height: fit-content;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.editModalHeader button:hover {
+    filter: opacity(0.8);
+}
