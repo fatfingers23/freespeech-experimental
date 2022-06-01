@@ -19,7 +19,7 @@ function Tile(props) {
 					);
 			}
 		} else {
-			props.handleEdit();
+			props.handleEdit(props);
 		}
 	}
 

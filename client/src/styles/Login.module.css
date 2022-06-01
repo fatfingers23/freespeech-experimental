@@ -1,0 +1,57 @@
+.background {
+    background-color: #21D4FD;
+    background-image: linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
+    width: auto;
+    height: 100%;
+}
+
+.loginBox {
+    background: inheret;
+    color: var(--text-color);
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    max-width: 500px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    
+}
+
+.loginBox p {
+    font-size: xx-large;
+    margin: 0;
+    padding:0;
+
+    margin-bottom: 10px;
+}
+
+.loginBox button {
+    border-radius: 5px;
+    border: 0;
+    padding: 10px;
+    font-size: large;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition-duration: .2s;
+}
+
+.discord {
+    background-color: #5865F2;
+    color: white;
+}
+
+.github {
+    background-color: black;
+    color: white;
+}
+
+.loginBox button:hover {
+    font-size: large;
+    padding: 20px;
+}

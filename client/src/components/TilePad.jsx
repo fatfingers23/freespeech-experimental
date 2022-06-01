@@ -17,8 +17,13 @@ import EditModal from './EditModal';
 function TilePad(props) {
 	const [page, setPage] = createSignal("Home");
 	const [muted, setMuted] = createSignal(false);
+	
+	/* Edit Mode */
 	const [editMode, setEditMode] = createSignal(false);
 	const [editModalOpen, setEditModalOpen] = createSignal(false);
+	const [editTile, setEditTile] = createSignal({});
+
+	/* History */
 	const [history, setHistory] = createSignal(
 		{
 			sessionHistory: ["Home"],
@@ -43,13 +48,25 @@ function TilePad(props) {
 		setHistory({...history(), sessionHistory: [...history().sessionHistory, page()]}); // Update the session history.
 	}
 
-	function handleEdit() {
+	function handleEdit(tileProps) {
 		if(!editModalOpen()) {
 			setEditModalOpen(true);
+			setEditTile(tileProps);
 		}
 	}
 
-	function closeEditModal() {
+	function closeEditModal(tile) {
+		if(tile.oldText !== tile.text) {
+			let sendEdit = async () => await fetch(`http://127.0.0.1:5000/change`, {
+				method: "POST",
+				mode: "cors",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify(tile)
+			});
+			sendEdit();
+		}
 		setEditModalOpen(false);
 	}
 
@@ -67,10 +84,12 @@ function TilePad(props) {
 					props.theme.volumeMutedButtonColor,
 				"--navigation-ribbon-color": props.theme.tileColor
 			}}
-		>	
+		>
+			
 			<Show when={editModalOpen()}>
-				<EditModal closeModal={closeEditModal} theme={props.theme} />
+				<EditModal tileProps={editTile()} closeModal={closeEditModal} theme={props.theme} />
 			</Show>
+
 			<TilePadNavigation 
 				page={page}
 				setPage={setPage}
@@ -84,7 +103,7 @@ function TilePad(props) {
 				setEditMode={setEditMode}
 			/>
 
-			<div class={styles.tilepad}>
+			<div class={styles.tilepad}>	
 				<For
 					each={props.tileData()[page()]}
 					fallback={
@@ -93,7 +112,7 @@ function TilePad(props) {
 						</div>
 					}
 				>
-					{(item) => (
+					{(item, i) => (
 						<Tile
 							{...item}
 							muted={muted()}
@@ -103,6 +122,7 @@ function TilePad(props) {
 							editMode={editMode}
 							callback={updatePage}
 							handleEdit={handleEdit}
+							index={i()}
 						/>
 					)}
 				</For>
