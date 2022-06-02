@@ -9,6 +9,7 @@ import Settings from "./components/Settings";
 import Login from "./components/Login";
 
 import { Color } from "./assets/open-color";
+import { fetchData } from "./API";
 
 function App() {
 	// Tile data
@@ -43,8 +44,7 @@ function App() {
 
 	onMount(async () => {
 		// Fetches the public default English template
-		const res = await fetch(`http://127.0.0.1:5000/public/english`);
-		setTileData(await res.json());
+		setTileData(await fetchData());
 	});
 
 	function themeChange(elem) {
@@ -55,46 +55,47 @@ function App() {
 		if (userSelection == "Light") setTheme(themeLight);
 	}
 
+	function refresh() {
+		alert(1);
+	}
+
 	return (
 		<>
-			<div
-				style={{ "--background-color": theme().backgroundColor }}
-				class={styles.app}
-			>
-				
-
+			<div style={{ "--background-color": theme().backgroundColor }} class={styles.app}>
 				<Routes>
+
+					{/* Home */}
 					<Route
 						path="/"
 						element={
-              <>
-              <MenuBar theme={theme()} />
-							<TilePad theme={theme()} tileData={tileData} />
-              </>
-            }
+							<>
+								<MenuBar theme={theme()} refresh={refresh}/>
+								<TilePad theme={theme()} tileData={tileData} />
+							</>
+						}
 					/>
+
+					{/* Settings */}
 					<Route
 						path="/settings"
 						element={
-              <>
-              <MenuBar theme={theme()} />
-							<Settings
-								theme={theme()}
-								themeCallback={themeChange}
-							/>
-              </>
+							<>
+								<MenuBar theme={theme()} refresh={refresh} />
+								<Settings theme={theme()} themeCallback={themeChange} />
+							</>
 						}
 					/>
-          <Route
+
+					{/* Login */}
+					<Route
 						path="/login"
 						element={
-              <>
-              <Login theme={theme()} />
-              </>
+							<>
+								<Login theme={theme()} />
+							</>
 						}
 					/>
 				</Routes>
-
 			</div>
 		</>
 	);

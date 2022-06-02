@@ -20,23 +20,20 @@ function EditModal(props) {
 					</div>
 
 					<button
-						onClick={() => props.closeModal({
-                            oldText: props.tileProps.text,
-                            text: tileTextInput.value,
-                            index: props.tileProps.index
-                        })}
+						onClick={() =>
+							props.closeModal({
+								oldText: props.tileProps.text,
+								text: tileTextInput.value,
+								index: props.tileProps.index,
+							})
+						}
 					>
 						<span class="material-symbols-outlined">close</span>
 					</button>
 				</div>
 
 				<p For="tileText">Tile text:</p>
-				<input
-					ref={tileTextInput}
-					type="text"
-					name="tileText"
-					value={props.tileProps.text}
-				/>
+				<input ref={tileTextInput} type="text" name="tileText" value={props.tileProps.text} />
 			</div>
 			<div class={styles.overlay}></div>
 		</div>

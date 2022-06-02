@@ -6,9 +6,20 @@ function Login(props) {
 			style={{
 				"--background-color": props.theme.backgroundColor,
 				"--text-color": props.theme.textColor,
+				"--tile-color": props.theme.tileColor,
 			}}
             class={styles.background}
 		>
+			<p style="margin-top:0px !important;" class={styles.BrandingText}>
+				Free Speech AAC{" "}
+				<a
+					target="_blank"
+					href="https://github.com/merkie/freespeech-experimental"
+				>
+					Experimental
+				</a>
+			</p>
+
 			<div class={styles.loginBox}>
 				<p>Login</p>
 				<button class={styles.discord}>

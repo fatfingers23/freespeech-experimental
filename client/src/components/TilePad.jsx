@@ -6,6 +6,8 @@ import Tile from "./Tile";
 import TilePadNavigation from './TilePadNavigation';
 import EditModal from './EditModal';
 
+import { sendEdit } from '../API';
+
 /* TilePad Component 
    - This renders a grid of tiles based on an array of tiles
      provided by the server.
@@ -57,15 +59,7 @@ function TilePad(props) {
 
 	function closeEditModal(tile) {
 		if(tile.oldText !== tile.text) {
-			let sendEdit = async () => await fetch(`http://127.0.0.1:5000/change`, {
-				method: "POST",
-				mode: "cors",
-				headers: {
-					"Content-Type": "application/json"
-				},
-				body: JSON.stringify(tile)
-			});
-			sendEdit();
+			sendEdit(tile);
 		}
 		setEditModalOpen(false);
 	}

@@ -28,6 +28,7 @@ function MenuBar(props) {
 				<Link href="/settings">
 					<span class="material-symbols-outlined">settings</span>
 				</Link>
+				<span onClick={props.refresh} class="material-symbols-outlined">refresh</span>
 			</div>
 		</div>
 	);
