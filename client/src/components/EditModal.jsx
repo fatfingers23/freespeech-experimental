@@ -22,6 +22,7 @@ function EditModal(props) {
 					<button
 						onClick={() =>
 							props.closeModal({
+								type: "tile",
 								oldText: props.tileProps.text,
 								text: tileTextInput.value,
 								index: props.tileProps.index,

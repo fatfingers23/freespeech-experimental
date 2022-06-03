@@ -2,22 +2,30 @@ import { createSignal, Show } from "solid-js";
 
 import styles from "../styles/TilePad.module.css";
 
-
+import { sendEdit } from "../API";
 
 function TilePadNavigation(props) {
-    
-    function toggleEditMode() {
-        if (props.editMode()) props.setEditMode(false);
-        else props.setEditMode(true);
-    }
-    
-    function toggleMute() {
-        if (props.muted()) props.setMuted(false);
-        else {
-            props.setMuted(true);
-            window.speechSynthesis.cancel();
-        }
-    }
+	function toggleEditMode() {
+		if (props.editMode()) {
+			props.setEditMode(false);
+			sendEdit({
+				type: "settings",
+				fontSize: props.tilePadSettings().fontSize,
+				iconSize: props.tilePadSettings().iconSize,
+				tileWidth: props.tilePadSettings().tileWidth
+			});
+		} else {
+			props.setEditMode(true);
+		}
+	}
+
+	function toggleMute() {
+		if (props.muted()) props.setMuted(false);
+		else {
+			props.setMuted(true);
+			window.speechSynthesis.cancel();
+		}
+	}
 
 	/*
 		Navigation Functions
@@ -25,13 +33,13 @@ function TilePadNavigation(props) {
 
 	function navigateBack() {
 		let currentPage = props.history().sessionHistory.pop(); // Remove the current page from the history
-		props.setHistory({...props.history(), futureHistory:[...props.history().futureHistory, currentPage]}); // Add the current page to the future history
+		props.setHistory({ ...props.history(), futureHistory: [...props.history().futureHistory, currentPage] }); // Add the current page to the future history
 		props.setPage(props.history().sessionHistory[props.history().sessionHistory.length - 1]); // Set the page to the previous page
 	}
 
 	function navigateForwards() {
 		let nextPage = props.history().futureHistory.pop(); // Remove the next page from the future history
-		props.setHistory({...props.history(), sessionHistory: [...props.history().sessionHistory, nextPage]}); // Add the next page to the session history
+		props.setHistory({ ...props.history(), sessionHistory: [...props.history().sessionHistory, nextPage] }); // Add the next page to the session history
 		props.setPage(nextPage); // Set the page to the next page
 	}
 
@@ -56,41 +64,25 @@ function TilePadNavigation(props) {
 			<div class={styles.app_header}>
 				<button
 					onclick={toggleEditMode}
-					class={`${styles.edit_button} ${
-						props.editMode() ? styles.edit_active : ""
-					}`}
+					class={`${styles.edit_button} ${props.editMode() ? styles.edit_active : ""}`}
 				>
 					<span class="material-symbols-outlined">edit</span>
 				</button>
 
 				<button
 					onclick={toggleMute}
-					class={`${styles.volume_button} ${
-						props.muted() ? styles.volume_active : ""
-					}`}
+					class={`${styles.volume_button} ${props.muted() ? styles.volume_active : ""}`}
 				>
-					<span class="material-symbols-outlined">
-						{props.muted() ? "volume_off" : "volume_up"}
-					</span>
+					<span class="material-symbols-outlined">{props.muted() ? "volume_off" : "volume_up"}</span>
 				</button>
 
 				<div class={styles.navigation_bar}>
-					<button
-						disabled={props.history().sessionHistory.length < 2}
-						onClick={navigateBack}
-					>
-						<span class="material-symbols-outlined">
-							arrow_back
-						</span>
+					<button disabled={props.history().sessionHistory.length < 2} onClick={navigateBack}>
+						<span class="material-symbols-outlined">arrow_back</span>
 					</button>
 					<p>{props.page()}</p>
-					<button
-						disabled={props.history().futureHistory.length < 1}
-						onClick={navigateForwards}
-					>
-						<span class="material-symbols-outlined">
-							arrow_forward
-						</span>
+					<button disabled={props.history().futureHistory.length < 1} onClick={navigateForwards}>
+						<span class="material-symbols-outlined">arrow_forward</span>
 					</button>
 				</div>
 			</div>
@@ -99,27 +91,15 @@ function TilePadNavigation(props) {
 				<div class={styles.edit_mode_ribbon}>
 					<div>
 						<p>Text size:</p>
-						<input
-							onchange={updateFontSize}
-							type="number"
-							value={props.tilePadSettings().fontSize}
-						/>
+						<input onchange={updateFontSize} type="number" value={props.tilePadSettings().fontSize} />
 					</div>
 					<div>
 						<p>Icon size:</p>
-						<input
-							onchange={updateIconSize}
-							type="number"
-							value={props.tilePadSettings().iconSize}
-						/>
+						<input onchange={updateIconSize} type="number" value={props.tilePadSettings().iconSize} />
 					</div>
 					<div>
 						<p>Tile width:</p>
-						<input
-							onchange={updateTileWidth}
-							type="number"
-							value={props.tilePadSettings().tileWidth}
-						/>
+						<input onchange={updateTileWidth} type="number" value={props.tilePadSettings().tileWidth} />
 					</div>
 				</div>
 			</Show>

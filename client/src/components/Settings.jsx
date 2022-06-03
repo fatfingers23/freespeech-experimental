@@ -1,6 +1,8 @@
 import styles from "../styles/Settings.module.css";
 
 function Settings(props) {
+	let themeSelector;
+
 	return (
 		<div
 			style={{
@@ -23,12 +25,12 @@ function Settings(props) {
 						choosing individual colors from the items below.
 					</p>
 					<select
-						onChange={props.themeCallback}
+						onChange={() => props.themeCallback(themeSelector.value)}
 						name="themeSelector"
-						id="themeSelector"
+						ref={themeSelector}
 					>
-						<option value="Dark">Dark</option>
-						<option value="Light">Light</option>
+						<option value="dark">Dark</option>
+						<option value="light">Light</option>
 					</select>
 				</div>
 			</div>

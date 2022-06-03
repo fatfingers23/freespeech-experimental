@@ -1,0 +1,122 @@
+.openToolbox, .closeToolbox {
+  position: absolute;
+  z-index: 11;
+  color: var(--text-color);
+  background-color: var(--tile-color);
+  border: 5px solid var(--background-color);
+  padding: 5px;
+  border-bottom-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-left: none;
+  top: 50%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  transform: scale(1.5) translateY(-50%);
+  transition-duration: .2s;
+  cursor: pointer;
+}
+
+.closeToolbox {
+    right: 0;
+    transform: scale(1.5) translateY(-50%) translateX(84%);
+}
+
+.openToolbox:hover {
+    padding-left: 30px;
+}
+
+.toolboxContainer {
+    height: 100vh;
+    z-index: 11;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--tile-color);
+    max-width: 400px;
+    width: 30%;
+    color: var(--text-color);
+    border-right: 10px solid var(--background-color);
+    transition-duration: .2s;
+}
+
+.toolboxTitle {
+    text-align: center;
+    font-size: 28px;
+}
+
+.toolboxCategories {
+    color: var(--text-color-secondary);
+    display: flex;
+    justify-content: space-around;
+}
+
+.toolboxCategorySelected {
+    color: var(--text-color);
+    border-bottom: 2px solid var(--text-color);
+}
+
+.toolboxCategories p {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.toolboxCategories p:hover {
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.toolboxSearch {
+    display: flex;
+    padding: 10px;
+    gap: 5px;
+}
+
+.toolboxSearch select, input, button {
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    cursor: pointer;
+}
+
+.toolboxSearch input {
+    flex-grow: 1;
+}
+
+.toolboxResults {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin: 10px;
+    background-color: var(--background-color);
+    border-radius: 5px;
+}
+
+@media only screen and (max-width: 1350px) {
+    .toolboxContainer {
+      width: 100% !important;
+      max-width: 100% !important;
+      height: 50%;
+      bottom: 0;
+      top: auto !important;
+      border: none;
+      border-top: 10px solid var(--background-color);
+    }
+    .closeToolbox {
+        top: 0;
+        left: 50%;
+        transform: scale(1.5) translateY(-67%) translateX(-20%) rotate(-90deg);
+    }
+    .openToolbox {
+        top: 100%;
+        left: 50%;
+        transform: rotate(-90deg) scale(1.5) translateX(90%);
+    }
+    .openToolbox:hover {
+        padding-left: 30px;
+        transform: rotate(-90deg) scale(1.5) translateX(70%) translateY(-13%);
+    }    
+  }

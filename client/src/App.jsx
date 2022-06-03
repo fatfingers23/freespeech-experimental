@@ -12,6 +12,10 @@ import { Color } from "./assets/open-color";
 import { fetchData } from "./API";
 
 function App() {
+	// User data
+	const [userData, setUserData] = createSignal({});
+	const [userSettings, setUserSettings] = createSignal({});
+
 	// Tile data
 	const [tileData, setTileData] = createSignal([]);
 
@@ -21,6 +25,7 @@ function App() {
 		tileColor: Color["gray-0"],
 		backgroundColor: Color["gray-2"],
 		textColor: Color["gray-9"],
+		textColorSecondary: Color["gray-5"],
 		navigationColor: Color["blue-6"],
 		highlightColor: Color["blue-2"],
 		editButtonColor: Color["yellow-7"],
@@ -33,6 +38,7 @@ function App() {
 		tileColor: Color["gray-8"],
 		backgroundColor: Color["gray-9"],
 		textColor: Color["gray-0"],
+		textColorSecondary: Color["gray-5"],
 		navigationColor: Color["blue-6"],
 		highlightColor: Color["blue-4"],
 		editButtonColor: Color["yellow-7"],
@@ -43,34 +49,36 @@ function App() {
 	const [theme, setTheme] = createSignal(themeDark);
 
 	onMount(async () => {
-		// Fetches the public default English template
-		setTileData(await fetchData());
+		refresh();
 	});
 
-	function themeChange(elem) {
-		const userSelection = elem.target.value;
+	const themeChange = (userSelection) => {
+		if (userSelection == "dark") setTheme(themeDark);
+		if (userSelection == "light") setTheme(themeLight);
+	};
 
-		if (userSelection == "Dark") setTheme(themeDark);
-
-		if (userSelection == "Light") setTheme(themeLight);
-	}
-
-	function refresh() {
-		alert(1);
-	}
+	const refresh = async () => {
+		// Fetch data for the (mock) user
+		setUserData(await fetchData());
+		// Set the tile Data to the user's selected layout
+		setTileData(userData()["layouts"][userData()["selected-layout"]]);
+		// Set the theme to the user's selected theme
+		themeChange(userData()["settings"]["theme"]);
+		// Set the settings to the user's settings
+		setUserSettings(userData()["settings"]);
+	};
 
 	return (
 		<>
 			<div style={{ "--background-color": theme().backgroundColor }} class={styles.app}>
 				<Routes>
-
 					{/* Home */}
 					<Route
 						path="/"
 						element={
 							<>
-								<MenuBar theme={theme()} refresh={refresh}/>
-								<TilePad theme={theme()} tileData={tileData} />
+								<MenuBar theme={theme()} refresh={refresh} />
+								<TilePad theme={theme()} refresh={refresh} userSettings={userSettings()} tileData={tileData} />
 							</>
 						}
 					/>
