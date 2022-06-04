@@ -5,6 +5,15 @@ import styles from "../styles/Toolbox.module.css";
 export default function Toolbox(props) {
     const [ isToolBoxOpen, setIsToolBoxOpen ] = createSignal(false);
     
+    function toggleToolBox() {
+        setIsToolBoxOpen(!isToolBoxOpen());
+        if(isToolBoxOpen()) {
+            props.setOverflow('hidden');
+        } else {
+            props.setOverflow('auto');
+        }
+    }
+
     return (
         <div  style={
             {
@@ -15,13 +24,13 @@ export default function Toolbox(props) {
             }
         } >
             <Show when={!isToolBoxOpen()}>
-                <button class={styles.openToolbox} onClick={() => setIsToolBoxOpen(true)}>
+                <button class={styles.openToolbox} onClick={toggleToolBox}>
                     <span class="material-symbols-outlined">more_vert</span>
                 </button>
             </Show>
             <Show when={isToolBoxOpen()}>
                 <div class={styles.toolboxContainer}>
-                    <button class={styles.closeToolbox} onClick={() => setIsToolBoxOpen(false)}>
+                    <button class={styles.closeToolbox} onClick={toggleToolBox}>
                         <span class="material-symbols-outlined">more_vert</span>
                     </button>
                     <p class={styles.toolboxTitle}>Toolbox</p>

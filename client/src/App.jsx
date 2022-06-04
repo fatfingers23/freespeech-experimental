@@ -19,6 +19,9 @@ function App() {
 	// Tile data
 	const [tileData, setTileData] = createSignal([]);
 
+	// Overflow
+	const [overflow, setOverflow] = createSignal("scroll");
+
 	// Theme
 	const themeLight = {
 		name: "Light",
@@ -70,7 +73,7 @@ function App() {
 
 	return (
 		<>
-			<div style={{ "--background-color": theme().backgroundColor }} class={styles.app}>
+			<div style={{ "--background-color": theme().backgroundColor, overflow: overflow() }} class={styles.app}>
 				<Routes>
 					{/* Home */}
 					<Route
@@ -78,7 +81,13 @@ function App() {
 						element={
 							<>
 								<MenuBar theme={theme()} refresh={refresh} />
-								<TilePad theme={theme()} refresh={refresh} userSettings={userSettings()} tileData={tileData} />
+								<TilePad
+									theme={theme()}
+									refresh={refresh}
+									userSettings={userSettings()}
+									tileData={tileData}
+									setOverflow={setOverflow}
+								/>
 							</>
 						}
 					/>

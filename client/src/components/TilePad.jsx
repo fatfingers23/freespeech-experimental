@@ -85,7 +85,7 @@ function TilePad(props) {
 		>
 			<Show when={editModalOpen()}>
 				<EditModal tileProps={editTile()} closeModal={closeEditModal} theme={props.theme} />
-				<Toolbox theme={props.theme} />
+				<Toolbox setOverflow={props.setOverflow} theme={props.theme} />
 			</Show>
 
 			<TilePadNavigation
