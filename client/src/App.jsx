@@ -1,4 +1,5 @@
 import { createSignal, onMount, Show } from "solid-js";
+import createLocalStore from "@solid-primitives/local-store";
 import { Routes, Route } from "solid-app-router";
 
 import styles from "./styles/App.module.css";
@@ -9,12 +10,28 @@ import Settings from "./components/Settings";
 import Login from "./components/Login";
 
 import { Color } from "./assets/open-color";
-import { fetchData } from "./API";
+import { fetchData, sendEdit } from "./API";
 
 function App() {
 	// User data
 	const [userData, setUserData] = createSignal({});
 	const [userSettings, setUserSettings] = createSignal({});
+	const [localSettings, setLocalSettings] = createLocalStore("freespeechaac");
+
+	// Check if localSettings are there, if not add them
+	if (!localSettings.tileWidth) {
+		setLocalSettings("fontSize", 18);
+		setLocalSettings("iconSize", 50);
+		setLocalSettings("tileWidth", 100);
+		setLocalSettings("editMode", false);
+		setLocalSettings("mute", false);
+	}
+
+	// Tempral
+	// TODO : Find a better way to handle this case
+	if (!localSettings.mute) {
+		setLocalSettings("mute", false);
+	}
 
 	// Tile data
 	const [tileData, setTileData] = createSignal([]);
@@ -56,8 +73,20 @@ function App() {
 	});
 
 	const themeChange = (userSelection) => {
-		if (userSelection == "dark") setTheme(themeDark);
-		if (userSelection == "light") setTheme(themeLight);
+		if (userSelection == "dark") {
+			sendEdit({
+				type: "theme",
+				theme: "dark"
+			});
+			setTheme(themeDark);
+		}
+		if (userSelection == "light") {
+			sendEdit({
+				type: "theme",
+				theme: "light"
+			});
+			setTheme(themeLight);
+		}
 	};
 
 	const refresh = async () => {
@@ -85,6 +114,8 @@ function App() {
 									theme={theme()}
 									refresh={refresh}
 									userSettings={userSettings()}
+									localSettings={localSettings}
+									setLocalSettings={setLocalSettings}
 									tileData={tileData}
 									setOverflow={setOverflow}
 								/>

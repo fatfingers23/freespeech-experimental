@@ -19,10 +19,10 @@ import { sendEdit } from "../API";
 
 function TilePad(props) {
 	const [page, setPage] = createSignal("Home");
-	const [muted, setMuted] = createSignal(false);
+	const [muted, setMuted] = createSignal((props.localSettings.mute == "true"));
 
 	/* Edit Mode */
-	const [editMode, setEditMode] = createSignal(false);
+	const [editMode, setEditMode] = createSignal((props.localSettings.editMode == "true")); // string to bool
 	const [editModalOpen, setEditModalOpen] = createSignal(false);
 	const [editTile, setEditTile] = createSignal({});
 
@@ -63,9 +63,9 @@ function TilePad(props) {
 
 	createEffect(() => {
 		setTilePadSettings({
-			fontSize: props.userSettings['font-size'],
-			iconSize: props.userSettings['icon-size'],
-			tileWidth: props.userSettings['tile-width']
+			fontSize: props.localSettings.fontSize,
+			iconSize: props.localSettings.iconSize,
+			tileWidth: props.localSettings.tileWidth
 		});
 	});
 
@@ -99,6 +99,7 @@ function TilePad(props) {
 				setMuted={setMuted}
 				editMode={editMode}
 				setEditMode={setEditMode}
+				setLocalSettings={props.setLocalSettings}
 			/>
 
 			<div class={styles.tilepad}>

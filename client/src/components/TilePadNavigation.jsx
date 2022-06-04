@@ -2,26 +2,24 @@ import { createSignal, Show } from "solid-js";
 
 import styles from "../styles/TilePad.module.css";
 
-import { sendEdit } from "../API";
-
 function TilePadNavigation(props) {
 	function toggleEditMode() {
 		if (props.editMode()) {
+			props.setLocalSettings("editMode", false);
 			props.setEditMode(false);
-			sendEdit({
-				type: "settings",
-				fontSize: props.tilePadSettings().fontSize,
-				iconSize: props.tilePadSettings().iconSize,
-				tileWidth: props.tilePadSettings().tileWidth
-			});
 		} else {
+			props.setLocalSettings("editMode", true);
 			props.setEditMode(true);
 		}
 	}
 
 	function toggleMute() {
-		if (props.muted()) props.setMuted(false);
+		if (props.muted())  {
+			props.setLocalSettings("mute", false);
+			props.setMuted(false);
+		} 
 		else {
+			props.setLocalSettings("mute", true);
 			props.setMuted(true);
 			window.speechSynthesis.cancel();
 		}
@@ -49,14 +47,17 @@ function TilePadNavigation(props) {
 
 	function updateFontSize(e) {
 		props.setTilePadSettings({ ...props.tilePadSettings(), fontSize: e.target.value });
+		props.setLocalSettings("fontSize", props.tilePadSettings().fontSize);
 	}
 
 	function updateIconSize(e) {
 		props.setTilePadSettings({ ...props.tilePadSettings(), iconSize: e.target.value });
+		props.setLocalSettings("iconSize", props.tilePadSettings().iconSize);
 	}
 
 	function updateTileWidth(e) {
 		props.setTilePadSettings({ ...props.tilePadSettings(), tileWidth: e.target.value });
+		props.setLocalSettings("tileWidth", props.tilePadSettings().tileWidth);
 	}
 
 	return (

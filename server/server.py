@@ -44,6 +44,14 @@ def change():
         with open('public/layouts/della-example.json', 'w+') as f:
             della_data['layouts'][della_data['selected-layout']][blob['page']][blob['index']]['text'] = blob['text']
             f.write(dumps(della_data))
+    
+    if blob['type'] == "theme":
+        with open('public/layouts/della-example.json', 'r') as f:
+            della_data = loads(f.read())
+        
+        with open('public/layouts/della-example.json', 'w+') as f:
+            della_data['settings']['theme'] = blob['theme']
+            f.write(dumps(della_data))
             
     return 'ok'
 
