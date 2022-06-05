@@ -7,8 +7,6 @@ from json import dumps, loads
 app = Flask(__name__)
 CORS(app)
 
-# bfVrwJn1BelYaaBg
-
 @app.route('/')
 def hello_world():
     return 'Hello World!'
