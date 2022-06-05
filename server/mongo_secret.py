@@ -1,1 +1,1 @@
-CONNECTION_STRING = "mongodb://localhost:27017"
+CONNECTION_STRING = "mongodb+srv://archer:fnW8tcMeq2fuXEWR@freespeech.90yuq.mongodb.net/?retryWrites=true&w=majority"
