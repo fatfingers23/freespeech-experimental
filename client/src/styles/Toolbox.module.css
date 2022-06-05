@@ -87,12 +87,65 @@
 
 .toolboxResults {
     display: flex;
+    gap: 10px;
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
     margin: 10px;
+    padding: 10px;
     background-color: var(--background-color);
     border-radius: 5px;
+    overflow: scroll;
+    height: calc(100vh - 350px);
+}
+
+.result { 
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 50px;
+    align-content: center;
+    align-items: center;
+}
+
+.tileStat {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 5px;
+    font-size: 14px;
+}
+
+.tileStat span {
+    font-size: 14px;
+}
+
+.toolboxResult {
+    display: flex;
+}
+
+.dropzone {
+    display:flex;
+    height: 100px;
+    width: auto;
+    margin: 10px;
+    text-align: center;
+    align-items: center;
+    border-radius: 5px;
+    border: 2px dashed black;
+    background-color: var(--background-color);
+}
+
+.dropzone p {
+    flex-grow: 1;
+    font-size: 20px;
+}
+
+.tooltip {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--background-color);
+    text-align: center;
 }
 
 @media only screen and (max-width: 1350px) {
@@ -118,5 +171,9 @@
     .openToolbox:hover {
         padding-left: 30px;
         transform: rotate(-90deg) scale(1.5) translateX(70%) translateY(-13%);
-    }    
+    }
+
+    .toolboxResults {
+        height: 35%;
+    }
   }

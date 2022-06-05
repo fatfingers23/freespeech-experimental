@@ -36,7 +36,7 @@ function Tile(props) {
 				"--wrap-width": `${props.tileWidth}px`,
 			}}
 			onclick={handleInteraction}
-			class={props.navigation ? styles.navigation : styles.tile}
+			class={`${props.navigation ? styles.navigation : styles.tile} ${props.dummy ? styles.dummy : ""}`}
 		>
 			<Show when={props.navigation}>
 				<div class={styles.navFolder}></div>

@@ -21,7 +21,7 @@
     padding-right: 50px;
     padding-left: 50px;
 	color: var(--text-color);
-	top: 30%;
+	top: 40%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	position: absolute;
@@ -90,4 +90,18 @@
 .BrandingText a:hover {
     color: var(--highlight-color);
     cursor: pointer;
+}
+
+.loginBox input {
+	background-color: var(--tile-color);
+	padding: 10px;
+}
+
+.email {
+	background-color: var(--navigation-color);
+}
+
+hr {
+	width: 100%;
+	color: var(--tile-color)
 }

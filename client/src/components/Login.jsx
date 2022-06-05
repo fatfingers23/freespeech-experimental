@@ -1,12 +1,18 @@
 import styles from "../styles/Login.module.css";
 
+import { login } from "../API";
+
 function Login(props) {
+	let email;
+	let pword;
+
 	return (
 		<div
 			style={{
 				"--background-color": props.theme.backgroundColor,
 				"--text-color": props.theme.textColor,
 				"--tile-color": props.theme.tileColor,
+				"--navigation-color": props.theme.navigationColor
 			}}
             class={styles.background}
 		>
@@ -22,6 +28,19 @@ function Login(props) {
 
 			<div class={styles.loginBox}>
 				<p>Login</p>
+
+				<input ref={email} type="text" placeholder="Email" />
+				<input ref={pword} type="password" placeholder="Password" />
+
+				<button class={styles.email} onClick={(() => login({
+					email: email.value,
+					password: pword.value
+				}))}>
+					Login with Email
+				</button>
+
+				<hr />
+
 				<button class={styles.discord}>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"

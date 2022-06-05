@@ -1,3 +1,5 @@
+import Tile from './Tile';
+
 import styles from "../styles/EditModal.module.css";
 
 function EditModal(props) {
@@ -33,10 +35,26 @@ function EditModal(props) {
 					</button>
 				</div>
 
-				<p For="tileText">Tile text:</p>
-				<input ref={tileTextInput} type="text" name="tileText" value={props.tileProps.text} />
+				<div style={{ display: "flex", "flex-direction": "row", "gap": "20px", "align-items": "center", "position": "relative" }}>
+					<div style={{ display: "flex", "flex-direction": "column" }}>
+						<p For="tileText">Tile text:</p>
+						<input ref={tileTextInput} type="text" name="tileText" value={props.tileProps.text} />
+					</div>
+					<div style={{ display: "flex", "flex-direction": "column", "flex-grow": "1" }}>
+						<p >Tile Image:</p>
+						<div class={styles.imageDropzone}>	
+							<img src={props.tileProps.image} width="50px" alt="" />
+						</div>
+					</div>
+				</div>
+				<div class={styles.dummyTileContainer}>
+					<p>Preview:</p>
+					<Tile dummy={true} {...props.tileProps} iconSize={50} theme={props.theme} tileWidth={100} />
+				</div>
 			</div>
-			<div class={styles.overlay}></div>
+			<div class={styles.overlay} onClick={() =>
+				props.closeModal({}) // Close but dont save changes
+			}></div>
 		</div>
 	);
 }

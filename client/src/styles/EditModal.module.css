@@ -9,7 +9,7 @@
 	height: fit-content;
 	z-index: 10;
 	position: absolute;
-	top: 20%;
+	top: 40%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	box-shadow: -2px -1px 8px rgba(0, 0, 0, 0.3);
@@ -52,4 +52,27 @@
 
 .editModalHeader button:hover {
     filter: opacity(0.8);
+}
+
+.imageDropzone {
+    width: fit-content;
+    height: 100%;
+    background-color: var(--background-color);
+    border-radius: 5px;
+    border: black 2px dashed;
+    padding: 10px;
+}
+
+.dummyTileContainer {
+    padding: 10px;
+    background-color: var(--background-color);
+    border-radius: 5px;
+    width: fit-content;
+    float: right;
+}
+
+.dummyTileContainer p {
+    margin:0;
+    font-size: smaller;
+    padding: 5px;
 }

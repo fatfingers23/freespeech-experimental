@@ -1,51 +1,56 @@
 .MenuBar {
-    padding: 5px;
-    display: flex;
-    justify-content: space-between;
-    width: 70%;
-    transform: translate(20%);
+	padding: 5px;
+	display: flex;
+	justify-content: space-between;
+	width: 70%;
+	transform: translate(20%);
 }
 
 .BrandingText {
-    font-weight: 300;
-    margin:0px;
-    color: var(--text-color);
-    font-size: 15px;
-    margin-top: 5px;
+	font-weight: 300;
+	margin: 0px;
+	color: var(--text-color);
+	font-size: 15px;
+	margin-top: 13px;
 }
 
 .BrandingText a {
-    all:unset;
-    font-weight: 100;
-    font-size: smaller;
-    transition-duration: .3s;
+	all: unset;
+	font-weight: 100;
+	font-size: smaller;
+	transition-duration: 0.3s;
 }
 
 .BrandingText a:hover {
-    color: var(--highlight-color);
-    cursor: pointer;
+	color: var(--highlight-color);
+	cursor: pointer;
 }
 
 .navIcons {
-    display: flex;
-    gap: 10px;
-    font-size: 13px;
-    color: var(--icon-color);
-    user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	font-size: 13px;
+	color: var(--icon-color);	
 }
 
 .navIcons span {
-    color: var(--text-color);
-    transition-duration: .3s;
+	color: var(--text-color);
+	transition-duration: 0.3s;
+    user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
 }
 
 .navIcons button {
-    all: unset;
+	all: unset;
 }
 
 .navIcons span:hover {
-    cursor: pointer;
-    color: var(--highlight-color);
+	cursor: pointer;
+	color: var(--highlight-color);
+}
+
+.navIcons .hl {
+	color: var(--highlight-color);
 }

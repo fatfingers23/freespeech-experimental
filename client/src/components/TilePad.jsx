@@ -19,10 +19,10 @@ import { sendEdit } from "../API";
 
 function TilePad(props) {
 	const [page, setPage] = createSignal("Home");
-	const [muted, setMuted] = createSignal((props.localSettings.mute == "true"));
+	const [muted, setMuted] = createSignal(props.localSettings.mute == "true");
 
 	/* Edit Mode */
-	const [editMode, setEditMode] = createSignal((props.localSettings.editMode == "true")); // string to bool
+	const [editMode, setEditMode] = createSignal(props.localSettings.editMode == "true"); // string to bool
 	const [editModalOpen, setEditModalOpen] = createSignal(false);
 	const [editTile, setEditTile] = createSignal({});
 
@@ -33,9 +33,9 @@ function TilePad(props) {
 	});
 
 	const [tilePadSettings, setTilePadSettings] = createSignal({
-		fontSize: props.userSettings['font-size'],
-		iconSize: props.userSettings['icon-size'],
-		tileWidth: props.userSettings['tile-width']
+		fontSize: props.userSettings["font-size"],
+		iconSize: props.userSettings["icon-size"],
+		tileWidth: props.userSettings["tile-width"],
 	});
 
 	function updatePage(_page) {
@@ -56,16 +56,16 @@ function TilePad(props) {
 
 	const closeEditModal = (tile) => {
 		if (tile.oldText !== tile.text) {
-			sendEdit({...tile, page: page()});
+			sendEdit({ ...tile, page: page() });
 		}
 		setEditModalOpen(false);
-	}
+	};
 
 	createEffect(() => {
 		setTilePadSettings({
 			fontSize: props.localSettings.fontSize,
 			iconSize: props.localSettings.iconSize,
-			tileWidth: props.localSettings.tileWidth
+			tileWidth: props.localSettings.tileWidth,
 		});
 	});
 
@@ -85,7 +85,12 @@ function TilePad(props) {
 		>
 			<Show when={editModalOpen()}>
 				<EditModal tileProps={editTile()} closeModal={closeEditModal} theme={props.theme} />
-				<Toolbox setOverflow={props.setOverflow} theme={props.theme} />
+				<Toolbox
+					setOverflow={props.setOverflow}
+					theme={props.theme}
+					setLocalSettings={props.setLocalSettings}
+					localSettings={props.localSettings}
+				/>
 			</Show>
 
 			<TilePadNavigation

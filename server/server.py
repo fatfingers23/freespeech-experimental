@@ -1,3 +1,4 @@
+import re
 from flask import Flask
 from flask import request
 from flask_cors import CORS
@@ -6,14 +7,18 @@ from json import dumps, loads
 app = Flask(__name__)
 CORS(app)
 
+# bfVrwJn1BelYaaBg
 
 @app.route('/')
 def hello_world():
     return 'Hello World!'
 
+@app.route('/login', methods=['POST'])
+def login():
+    print(request.get_json())
+    return ''
 
 """ Default English Layout """
-
 
 @app.route('/public/english')
 def fetch_english_layout():
@@ -22,7 +27,6 @@ def fetch_english_layout():
 
 
 """ Change Route"""
-
 
 @app.route('/change', methods=['POST'])
 def change():
@@ -58,10 +62,16 @@ def change():
 
 @app.route('/user/<username>/data', methods=['GET'])
 def getUserData(username):
-    with open('public/layouts/della-example.json') as f:
-        della_data = loads(f.read())
+    dummies = {'dummy':{'username':'archer'}}
+    
+    HEADERS = dict(request.headers) # headers
+    
+    if HEADERS['Bearer'] in dummies:
+        with open('public/layouts/della-example.json') as f:
+            della_data = loads(f.read())
+            della_data['username'] = dummies[ ['Bearer']]['username']
 
-    return dumps(della_data)
+        return dumps(della_data)
 
 
 if __name__ == '__main__':

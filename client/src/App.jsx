@@ -19,12 +19,14 @@ function App() {
 	const [localSettings, setLocalSettings] = createLocalStore("freespeechaac");
 
 	// Check if localSettings are there, if not add them
-	if (!localSettings.tileWidth) {
+	if (!localSettings.toolboxPage) {
 		setLocalSettings("fontSize", 18);
 		setLocalSettings("iconSize", 50);
 		setLocalSettings("tileWidth", 100);
 		setLocalSettings("editMode", false);
 		setLocalSettings("mute", false);
+		setLocalSettings("isToolboxOpen", false);
+		setLocalSettings("toolboxPage", "marketplace");
 	}
 
 	// Tempral
@@ -109,7 +111,7 @@ function App() {
 						path="/"
 						element={
 							<>
-								<MenuBar theme={theme()} refresh={refresh} />
+								<MenuBar theme={theme()} refresh={refresh} username={userData()["username"]} />
 								<TilePad
 									theme={theme()}
 									refresh={refresh}
