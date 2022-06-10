@@ -1,4 +1,4 @@
-import { createSignal, createEffect } from "solid-js";
+import { createSignal, createEffect, onMount } from "solid-js";
 
 import styles from "../styles/TilePad.module.css";
 
@@ -7,7 +7,7 @@ import TilePadNavigation from "./TilePadNavigation";
 import EditModal from "./EditModal";
 import Toolbox from "./Toolbox";
 
-import { sendEdit } from "../API";
+import { sendEdit, validateSession } from "../API";
 
 /* TilePad Component 
    - This renders a grid of tiles based on an array of tiles
@@ -18,6 +18,11 @@ import { sendEdit } from "../API";
 */
 
 function TilePad(props) {
+	onMount(async () => {
+		//props.checkSession();
+		;
+	});
+
 	const [page, setPage] = createSignal("Home");
 	const [muted, setMuted] = createSignal(props.localSettings.mute == "true");
 
@@ -56,7 +61,9 @@ function TilePad(props) {
 
 	const closeEditModal = (tile) => {
 		if (tile.oldText !== tile.text) {
-			sendEdit({ ...tile, page: page() });
+			props.handleChange(page(), tile.index, {
+				text: tile.text
+			});
 		}
 		setEditModalOpen(false);
 	};
@@ -81,6 +88,7 @@ function TilePad(props) {
 				"--volume-button-color": props.theme.volumeButtonColor,
 				"--volume-muted-button-color": props.theme.volumeMutedButtonColor,
 				"--navigation-ribbon-color": props.theme.tileColor,
+				"--tile-color": props.theme.tileColor
 			}}
 		>
 			<Show when={editModalOpen()}>
@@ -129,7 +137,15 @@ function TilePad(props) {
 							index={i()}
 						/>
 					)}
+
+					
+
 				</For>
+				<Show when={editMode()}>
+				<button class={styles.editModeAdd}>
+						<span class="material-symbols-outlined">add</span>
+				</button>
+				</Show>
 			</div>
 		</div>
 	);

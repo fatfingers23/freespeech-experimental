@@ -7,10 +7,10 @@ import styles from "./styles/App.module.css";
 import TilePad from "./components/TilePad";
 import MenuBar from "./components/MenuBar";
 import Settings from "./components/Settings";
-import Login from "./components/Login";
+import Portal from "./components/Portal";
 
 import { Color } from "./assets/open-color";
-import { fetchData, sendEdit } from "./API";
+import { getLayout, sendEdit, validateSession } from "./API";
 
 function App() {
 	// User data
@@ -19,7 +19,7 @@ function App() {
 	const [localSettings, setLocalSettings] = createLocalStore("freespeechaac");
 
 	// Check if localSettings are there, if not add them
-	if (!localSettings.toolboxPage) {
+	if (!localSettings.session) {
 		setLocalSettings("fontSize", 18);
 		setLocalSettings("iconSize", 50);
 		setLocalSettings("tileWidth", 100);
@@ -27,19 +27,28 @@ function App() {
 		setLocalSettings("mute", false);
 		setLocalSettings("isToolboxOpen", false);
 		setLocalSettings("toolboxPage", "marketplace");
-	}
-
-	// Tempral
-	// TODO : Find a better way to handle this case
-	if (!localSettings.mute) {
 		setLocalSettings("mute", false);
+		setLocalSettings("session", "");
 	}
 
 	// Tile data
-	const [tileData, setTileData] = createSignal([]);
+	const [tileData, setTileData] = createSignal({});
 
 	// Overflow
 	const [overflow, setOverflow] = createSignal("scroll");
+
+	// Ceck Session
+	const checkSession = async () => {
+		const res = await validateSession({
+			session: localSettings.session,
+		});
+
+		if(res.user) {
+			setUserData(res.user);
+		}
+
+		return res;
+	};
 
 	// Theme
 	const themeLight = {
@@ -71,6 +80,15 @@ function App() {
 	const [theme, setTheme] = createSignal(themeDark);
 
 	onMount(async () => {
+		//refresh();
+		const session = await checkSession();
+
+		console.log(session);
+
+		if (session.success == false && window.location.toString().includes("portal") == false) {
+			window.location = "/portal";
+		}
+
 		refresh();
 	});
 
@@ -78,29 +96,43 @@ function App() {
 		if (userSelection == "dark") {
 			sendEdit({
 				type: "theme",
-				theme: "dark"
+				theme: "dark",
 			});
 			setTheme(themeDark);
 		}
 		if (userSelection == "light") {
 			sendEdit({
 				type: "theme",
-				theme: "light"
+				theme: "light",
 			});
 			setTheme(themeLight);
 		}
 	};
 
 	const refresh = async () => {
-		// Fetch data for the (mock) user
-		setUserData(await fetchData());
-		// Set the tile Data to the user's selected layout
-		setTileData(userData()["layouts"][userData()["selected-layout"]]);
+		const layout = await getLayout({
+			session: localSettings.session,
+			layout: userData()["layouts"][userData()["selectedLayout"]]
+		});
+		
+		setTileData(layout.layout.data);
+
+		console.log(layout.layout);
+
+		console.log(layout.layout.data);
+
 		// Set the theme to the user's selected theme
-		themeChange(userData()["settings"]["theme"]);
+		// themeChange(userData()["theme"]);
+		// console.log(userData()["theme"]);
 		// Set the settings to the user's settings
-		setUserSettings(userData()["settings"]);
+		// setUserSettings(userData()["settings"]);
 	};
+
+	function handleChange(page, index, tile) {
+		let newTilePad = tileData();
+		newTilePad[page][index]['text'] = tile.text;
+		setTileData(newTilePad);
+	}
 
 	return (
 		<>
@@ -113,6 +145,7 @@ function App() {
 							<>
 								<MenuBar theme={theme()} refresh={refresh} username={userData()["username"]} />
 								<TilePad
+									checkSession={checkSession}
 									theme={theme()}
 									refresh={refresh}
 									userSettings={userSettings()}
@@ -120,6 +153,7 @@ function App() {
 									setLocalSettings={setLocalSettings}
 									tileData={tileData}
 									setOverflow={setOverflow}
+									handleChange={handleChange}
 								/>
 							</>
 						}
@@ -138,10 +172,14 @@ function App() {
 
 					{/* Login */}
 					<Route
-						path="/login"
+						path="/portal"
 						element={
 							<>
-								<Login theme={theme()} />
+								<Portal
+									setLocalSettings={setLocalSettings}
+									localSettings={localSettings()}
+									theme={theme()}
+								/>
 							</>
 						}
 					/>

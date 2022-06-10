@@ -21,7 +21,8 @@
     padding-right: 50px;
     padding-left: 50px;
 	color: var(--text-color);
-	top: 40%;
+	margin-top:100px;
+	top: 30%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	position: absolute;
@@ -66,9 +67,13 @@
 	color: white;
 }
 
+.github, .discord {
+	background-color: rgb(68, 68, 68) !important;
+	opacity: .5;
+}
+
 .loginBox button:hover {
-	font-size: large;
-	padding: 20px;
+	font-size: larger;
 }
 
 .BrandingText {
@@ -104,4 +109,22 @@
 hr {
 	width: 100%;
 	color: var(--tile-color)
+}
+
+.error {
+	font-size: medium !important;
+	margin: 0;
+	padding: 0;
+	color: var(--error-color);
+}
+
+.link {
+	color: var(--navigation-color);
+	margin: 0;
+	padding: 0;
+}
+
+.errorOptions {
+	display: flex;
+	justify-content: space-between;
 }

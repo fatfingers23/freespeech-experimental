@@ -1,1 +1,0 @@
-CONNECTION_STRING = "mongodb+srv://archer:fnW8tcMeq2fuXEWR@freespeech.90yuq.mongodb.net/?retryWrites=true&w=majority"

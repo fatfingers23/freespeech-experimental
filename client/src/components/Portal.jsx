@@ -1,10 +1,32 @@
-import styles from "../styles/Login.module.css";
-
+import styles from "../styles/Portal.module.css";
+import { createSignal } from "solid-js";
 import { login } from "../API";
+import { Color } from "../assets/open-color";
 
 function Login(props) {
+	const [error, setError] = createSignal(null);
+
 	let email;
 	let pword;
+
+	async function handleEmailLogin() {
+		if (email.value.trim() === "" || pword.value.trim() === "") {
+			setError("Please enter an email and password");
+			return;
+		}
+
+		const res = await login({
+			email: email.value,
+			password: pword.value,
+		});
+
+		if(res.success) {
+			props.setLocalSettings("session", res.session);
+			window.location = "/";
+		}
+	}
+
+    /*  TODO: Make this more responsive on mobile*/
 
 	return (
 		<div
@@ -12,16 +34,14 @@ function Login(props) {
 				"--background-color": props.theme.backgroundColor,
 				"--text-color": props.theme.textColor,
 				"--tile-color": props.theme.tileColor,
-				"--navigation-color": props.theme.navigationColor
+				"--navigation-color": props.theme.navigationColor,
+				"--error-color": Color["red-6"],
 			}}
-            class={styles.background}
+			class={styles.background}
 		>
 			<p style="margin-top:0px !important;" class={styles.BrandingText}>
 				Free Speech AAC{" "}
-				<a
-					target="_blank"
-					href="https://github.com/merkie/freespeech-experimental"
-				>
+				<a target="_blank" href="https://github.com/merkie/freespeech-experimental">
 					Experimental
 				</a>
 			</p>
@@ -32,15 +52,20 @@ function Login(props) {
 				<input ref={email} type="text" placeholder="Email" />
 				<input ref={pword} type="password" placeholder="Password" />
 
-				<button class={styles.email} onClick={(() => login({
-					email: email.value,
-					password: pword.value
-				}))}>
+				<button class={styles.email} onClick={handleEmailLogin}>
 					Login with Email
 				</button>
 
-				<hr />
+				<Show when={error()}>
+					<div class={styles.errorOptions}>
+						<p class={styles.error}>Error: {error()}.</p>
+						<a class={styles.link} href="#">
+							Forgot password?
+						</a>
+					</div>
+				</Show>
 
+				<hr />
 				<button class={styles.discord}>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -67,6 +92,9 @@ function Login(props) {
 					</svg>
 					Login with Github
 				</button>
+				<a style={{"margin-top": "10px"}} class={styles.link} href="#">
+					Don't have an account? Sign up!
+				</a>
 			</div>
 		</div>
 	);

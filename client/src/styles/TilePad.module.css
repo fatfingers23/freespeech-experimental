@@ -117,3 +117,28 @@
     width: 50px;
     font-size:medium;
 }
+
+.editModeAdd {
+    all: unset;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    border: var(--tile-color) 4px dashed;
+    color: var(--tile-color);
+    padding:5px;
+    margin:5px;
+    border-radius:5px;
+    width: fit-content;
+    flex: 1 1 var(--wrap-width);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-grow: 1;
+}
+
+.editModeAdd:hover {
+    border: var(--text-color) 4px dashed;
+    color: var(--text-color);
+}

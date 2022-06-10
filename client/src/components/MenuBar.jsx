@@ -1,7 +1,6 @@
 import styles from "../styles/MenuBar.module.css";
 import { Link } from "solid-app-router";
 
-
 function MenuBar(props) {
 	return (
 		<div
@@ -29,7 +28,7 @@ function MenuBar(props) {
 					<span class="material-symbols-outlined">settings</span>
 				</Link>
 				<span onClick={props.refresh} class="material-symbols-outlined">refresh</span>
-				{/* v Take this out v */}
+				{/* v Dont take this out yet... v */}
 				<p>{props.username}</p>
 			</div>
 		</div>

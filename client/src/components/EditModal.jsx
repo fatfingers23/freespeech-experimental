@@ -1,9 +1,17 @@
+import { createSignal } from "solid-js";
+
 import Tile from './Tile';
 
 import styles from "../styles/EditModal.module.css";
 
 function EditModal(props) {
+	const [editTileText, setEditTileText] = createSignal(props.tileProps.text);
+
 	let tileTextInput;
+
+	function handleTileTextChange() {
+		setEditTileText(tileTextInput.value);
+	}
 
 	return (
 		<div
@@ -38,7 +46,7 @@ function EditModal(props) {
 				<div style={{ display: "flex", "flex-direction": "row", "gap": "20px", "align-items": "center", "position": "relative" }}>
 					<div style={{ display: "flex", "flex-direction": "column" }}>
 						<p For="tileText">Tile text:</p>
-						<input ref={tileTextInput} type="text" name="tileText" value={props.tileProps.text} />
+						<input onChange={handleTileTextChange} ref={tileTextInput} type="text" name="tileText" value={props.tileProps.text} />
 					</div>
 					<div style={{ display: "flex", "flex-direction": "column", "flex-grow": "1" }}>
 						<p >Tile Image:</p>
@@ -49,7 +57,7 @@ function EditModal(props) {
 				</div>
 				<div class={styles.dummyTileContainer}>
 					<p>Preview:</p>
-					<Tile dummy={true} {...props.tileProps} iconSize={50} theme={props.theme} tileWidth={100} />
+					<Tile dummy={true} {...props.tileProps} text={editTileText()} iconSize={50} theme={props.theme} tileWidth={100} />
 				</div>
 			</div>
 			<div class={styles.overlay} onClick={() =>
